@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jetsgreen/reclass#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "path": "^0.12.7"
   }
 }

@@ -13,11 +13,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const routes = require("./controllers/jobs.js");
+const routes = require("./controllers/jobsController.js");
 
 app.use(routes);
 
 // Begin our server to listen to client request
 app.listen(PORT, function() {
-    console.log(`Server listening on: http://locahost:${PORT}`);
+    console.log("Server listening on: http://localhost" + PORT);
 });
