@@ -1,0 +1,24 @@
+{
+  "name": "reclass",
+  "version": "1.0.0",
+  "description": "Project 2/Job seeker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jetsgreen/reclass.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jetsgreen/reclass/issues"
+  },
+  "homepage": "https://github.com/jetsgreen/reclass#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}
