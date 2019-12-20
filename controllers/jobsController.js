@@ -13,6 +13,8 @@ router.get("/jobs", function(req, res) {
     });
 });
 
+
+
 // Send response back to the client to create a burger
 // router.post("/jobs", (req, res) => {
 //     burger.create([
