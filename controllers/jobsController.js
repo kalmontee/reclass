@@ -13,6 +13,19 @@ router.get("/jobs", function(req, res) {
     });
 });
 
+router.post("/jobs", function(req, res) {
+    jobs.create([
+      "job_title", "job_state", "job_city", "job_salary", "job_description", "job_requirements"
+    ], [
+      req.body.title, req.body.state, req.body.city, req.body.salary, req.body.job_description, req.body.requirements
+    ], function(result) {
+      // Send back the ID of the new quote
+      res.json({ id: result.insertId });
+    });
+  });
+
+
+
 
 
 // Send response back to the client to create a burger
