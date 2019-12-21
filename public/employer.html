@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +12,29 @@
     <script src="assets/js/main.js"></script>
     <title>Project 2</title>
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="index.html">Job Seeker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+        class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"> <a class="nav-link" href="employer.html">Employers Post Jobs <span
+              class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="">Recent Jobs Added</a> </li>
+            </ul>
+        </div>
+    </nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Employer Post</h1>
-          <p class="lead">Find your dream candidate here!</p>
+            <h1 class="display-4">Employer Post</h1>
+            <p class="lead">Find your dream candidate here!</p>
         </div>
-      </div>
-      <form>
+    </div>
+    <form>
         <div class="form-group">
-          <label for="exampleFormControlInput1">Job Title</label>
-          <input type="text" class="form-control" id="job-title" placeholder="Ex Web Developer">
+            <label for="exampleFormControlInput1">Job Title</label>
+            <input type="text" class="form-control" id="job-title" placeholder="Ex Web Developer">
         </div>
 
         <div class="form-group">
@@ -36,17 +49,18 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">Salary Desired</label>
             <input type="email" class="form-control" id="Salary" placeholder="Ex 65000">
-          </div>
-        
+        </div>
+
         <div class="form-group">
-          <label for="exampleFormControlTextarea1">Job Description</label>
-          <textarea class="form-control" id="job-desc" rows="3"></textarea>
+            <label for="exampleFormControlTextarea1">Job Description</label>
+            <textarea class="form-control" id="job-desc" rows="3"></textarea>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Job Requirements</label>
             <input type="email" class="form-control" id="job-req" placeholder="Ex HTML, CSS">
-          </div>
-      </form>
+        </div>
+    </form>
 </body>
+
 </html>

@@ -13,28 +13,6 @@ router.get("/jobs", function(req, res) {
     });
 });
 
-
-
-// Send response back to the client to create a burger
-// router.post("/jobs", (req, res) => {
-//     burger.create([
-
-//     ], [
-//         req.body.burger, req.body.devoured
-//     ], (results) => res.json({ id: results.insertId }));
-// });
-
-// Send response back to the client to create a burger
-// router.post("/jobs", (req, res) => {
-//     jobs.create([
-
-//     ], [
-//         req.body.jobs, req.body.devoured
-//     ], function(results) {
-//         res.json({ id: results.insertId })
-//     });
-// });
-
 // Send response back to the client to delete a burger
 // router.delete("/jobs/:id", (req, res) => {
 //     let condition = "id = " + req.params.id;
