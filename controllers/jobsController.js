@@ -13,6 +13,7 @@ router.get("/jobs", function(req, res) {
     });
 });
 
+
 router.post("/jobs", function(req, res) {
     jobs.create([
       "job_title", "job_state", "job_city", "job_salary", "job_description", "job_requirements"
@@ -23,9 +24,6 @@ router.post("/jobs", function(req, res) {
       res.json({ id: result.insertId });
     });
   });
-
-
-
 
 
 // Send response back to the client to create a burger
@@ -47,6 +45,7 @@ router.post("/jobs", function(req, res) {
 //         res.json({ id: results.insertId })
 //     });
 // });
+
 
 // Send response back to the client to delete a burger
 // router.delete("/jobs/:id", (req, res) => {

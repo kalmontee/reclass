@@ -44,4 +44,15 @@ $(document).ready(function () {
         });
     });
 
+    $("#findJobs").on("submit", function(event) {
+        event.preventDefault();
+
+        console.log("Working?");
+        // $.ajax("/jobs", {
+        //     type: "GET"
+        // }).then(function(data) {
+
+        // })
+    });
+
 });
