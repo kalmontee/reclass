@@ -26,22 +26,28 @@
             </ul>
         </div>
     </nav>
-    <form>
-        <div class="row">
-            <div class="col">
-                <h3>What are you seeking?</h3> <input type="text" class="form-control" placeholder="Job Title">
+    <div class="form">
+        <form id="jobSearch">
+            <div class="row">
+                <div class="col">
+                    <h3>What are you seeking?</h3> <input type="text" id="jobTitle" class="form-control" placeholder="Job Title">
+                </div>
+                <div class="col">
+                    <h3>Where?</h3> <input type="text" id="cityState" class="form-control" placeholder="Input State">
+                </div>
+                <hr> <button type="submit" id="findJobs" class="btn btn-primary">Find Jobs</button> <br>
             </div>
-            <div class="col">
-                <h3>Where?</h3> <input type="text" class="form-control" placeholder="Input City, and State">
-            </div>
-        </div>
-    </form>
-    <hr> <button type="button" id="findJobs" class="btn btn-primary">Find Jobs</button> <br>
+        </form>
+    </div>
     <section>
         <div class="container">
-
+            <div id="heading"></div>
+            <div id="jobs_added"></div>
         </div>
-        <div id="jobs-added"></div>
+
+        <!-- <footer class="bg-dark">
+            &copy Job Seeker, 2020
+        </footer> -->
     </section>
 
 </body>
