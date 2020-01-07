@@ -13,12 +13,11 @@ router.get("/jobs", function(req, res) {
     });
 });
 
-
 router.post("/jobs", function(req, res) {
     jobs.create([
-      "job_title", "job_state", "job_city", "job_salary", "job_description", "job_requirements"
+      "company_name","job_title", "job_state", "job_city", "job_salary", "job_description", "job_requirements", "applied_to", "job_created"
     ], [
-      req.body.title, req.body.state, req.body.city, req.body.salary, req.body.job_description, req.body.requirements
+      req.body.company, req.body.title, req.body.state, req.body.city, req.body.salary, req.body.job_description, req.body.job_requirements, req.body.applied_to, req.body.job_created
     ], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
@@ -26,30 +25,25 @@ router.post("/jobs", function(req, res) {
   });
 
 
-// Send response back to the client to create a burger
-// router.post("/jobs", (req, res) => {
-//     burger.create([
+router.put("/jobs/:id", function(req,res){
+	var condition = "id = " + req.params.id;
+	console.log("condition", condition);
 
-//     ], [
-//         req.body.burger, req.body.devoured
-//     ], (results) => res.json({ id: results.insertId }));
-// });
+	jobs.update({
+		applied_to: req.body.applied_to
+	}, condition, function(result){
 
-// Send response back to the client to create a burger
-// router.post("/jobs", (req, res) => {
-//     jobs.create([
+		if (result.changedRows == 0) {
+		  // If no rows were changed, then the ID must not exist, so 404
+		  return res.status(404).end();
+		} else {
+		  res.json({ id: req.params.id});
+		}
+	});
 
-//     ], [
-//         req.body.jobs, req.body.devoured
-//     ], function(results) {
-//         res.json({ id: results.insertId })
-//     });
-// });
+});
 
 
-// Send response back to the client to delete a burger
-// router.delete("/jobs/:id", (req, res) => {
-//     let condition = "id = " + req.params.id;
 
 
 module.exports = router;

@@ -10,18 +10,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.js"></script>
     <title>Project 2</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="index.html">Job Seeker</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
-        class="navbar-toggler-icon"></span> </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+                class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active"> <a class="nav-link" href="employer.html">Employers Post Jobs <span
-              class="sr-only">(current)</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" href="">Recent Jobs Added</a> </li>
+                            class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="recentjobs.html">Recent Jobs Added</a> </li>
             </ul>
         </div>
     </nav>
@@ -33,38 +35,47 @@
     </div>
     <form>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Job Title</label>
+            <label>Company Name</label>
+            <input type="text" class="form-control" id="company-name">
+        </div>
+        <div class="form-group">
+            <label>Job Title</label>
             <input type="text" class="form-control" id="job-title" placeholder="Ex Web Developer">
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlInput1">Type in State</label>
+            <label>Type in State</label>
             <input type="text" class="form-control" id="state" placeholder="Ex New Jersey">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Type in City</label>
+            <label>Type in City</label>
             <input type="text" class="form-control" id="city" placeholder="Ex Passaic">
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlInput1">Salary Desired</label>
+            <label>Salary Desired</label>
 
-            <input type="email" class="form-control" id="salary" placeholder="Ex 65000">
-          </div>
-        
+            <input type="text" class="form-control" id="salary" placeholder="Ex 65000">
+        </div>
+
         <div class="form-group">
-            <label for="exampleFormControlTextarea1">Job Description</label>
+            <label>Job Description</label>
             <textarea class="form-control" id="job-desc" rows="3"></textarea>
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlInput1">Job Requirements</label>
-            <input type="email" class="form-control" id="job-req" placeholder="Ex HTML, CSS">
+            <label>Job Requirements</label>
+            <input type="text" class="form-control" id="job-req" placeholder="Ex HTML, CSS">
 
-          </div>
-      </form>
-      <button type="button" id="employer-btn" class="btn btn-outline-primary">Submit</button>
+        </div>
+    </form>
 
+    <button type="button" id="employer-btn" class="btn btn-primary">
+        Submit
+    </button>
+    
 </body>
-
+<form>
+    
+  </form>
 </html>
