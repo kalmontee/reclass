@@ -158,7 +158,7 @@ $(document).ready(function() {
                     for (var i = 0; i < len; i++) {
                         var createdJob = "<h6>" + recentArr[i].company_name + "<br>" + recentArr[i].job_title + "<br>" + recentArr[i].job_state +
                             "<br>" + recentArr[i].job_city + "<br>" + recentArr[i].job_salary + "<br>" + recentArr[i].job_description + "<br>" + recentArr[i].job_requirements + "<br>" +
-                            "<br>" + "<button class = 'applyJob' data-id=''>Apply</button>" + "</h6>"
+                            "<br>" + "<button class = 'applyJob' data-id=" + recentArr[i].job_id + ">Apply</button>" + "</h6>"
                     }
                     recentJob.append(createdJob);
 
@@ -178,11 +178,10 @@ $(document).ready(function() {
 
     $(document).on("click", ".applyJob", function (event) {
         event.preventDefault();
-        var jobId = $(this).attr("data-jobid");
+        var jobId = $(this).attr("data-id");
+        console.log(jobId)
         var appliedJob = true;
-
-        console.log($(this))
-
+    
         var newApplied = {
             applied_to: appliedJob
         };
@@ -195,7 +194,8 @@ $(document).ready(function() {
         }).then(function () {
             console.log("changed job to", appliedJob);
             // Reload the page to get the updated list
-            location.reload();
+            // location.reload();
+            
         });
 
     });
