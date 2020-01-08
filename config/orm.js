@@ -28,7 +28,32 @@ function objToSql(ob) {
 
 const orm = {
     all(tableInput, cb) {
-        let queryString = "SELECT * FROM " + tableInput + ";";
+        let queryString = "SELECT * FROM jobs " + tableInput + ";";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
+
+    selectOne(tableName, columnName, columnName2, value, value2, cb) {
+        // SELECT * FROM jobs WHERE (job_title, job_state) = ('Junior Developer', 'New York');
+        let queryString = `SELECT * FROM ${tableName} WHERE (${columnName}, ${columnName2}) = ('${value}', '${value2}');`;
+
+        // SELECT * FROM jobs WHERE ((job_title LIKE '%Engineer%') + (job_state LIKE '%Florida'));
+        // let queryString2 = `SELECT * FROM ${tableName} WHERE (${columnName} LIKE '%${value}%');`;
+        // console.log(queryString2);
+
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
+
+    stateKeywords(tableName, columnName, value, cb) {
+        // SELECT * FROM jobs WHERE ((job_title LIKE '%Engineer%') + (job_state LIKE '%Florida'));
+        let queryString = `SELECT * FROM ${tableName} WHERE (${columnName} LIKE '%${value}%');`;
+        console.log(queryString);
+
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
@@ -67,10 +92,7 @@ const orm = {
     },
 
     delete(table, condition, cb) {
-        let queryString = 'DELETE FROM ' + table;
-
-        queryString += ' WHERE ';
-        queryString += condition;
+        let queryString = 'DELETE FROM ' + table + ' WHERE ' + condition;
 
         connection.query(queryString, (err, results) => {
             if (err) throw err;
