@@ -45,7 +45,7 @@ router.post("/jobs", function(req, res) {
   });
  
 router.put("/jobs/:id", function(req,res){
-	var condition = "id = " + req.params.id;
+	var condition = "job_id = " + req.params.id;
 	console.log("condition", condition);
 
 	jobs.update({
