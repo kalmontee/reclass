@@ -42,6 +42,7 @@ router.post("/jobs", function(req, res) {
         // Send back the ID of the new quote
         res.json({ id: result.insertId });
     });
+  });
  
 router.put("/jobs/:id", function(req,res){
 	var condition = "id = " + req.params.id;
@@ -57,7 +58,7 @@ router.put("/jobs/:id", function(req,res){
 		} else {
 		  res.json({ id: req.params.id});
 		}
-	});
+  });
 });
 
 

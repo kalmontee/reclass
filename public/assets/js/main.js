@@ -149,7 +149,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < len; i++) {
                 var addedJob = recentArr[i].job_created;
-                let isavail = false;
+                var isavail = false;
                 var test = addedJob.slice(0, 10)
 
                 console.log(test)
