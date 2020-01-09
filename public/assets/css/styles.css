@@ -46,6 +46,34 @@ h3 {
     border-bottom: solid 1px rgb(192, 192, 192);
 }
 
+.menu {
+    width: 30%;
+    float: left;
+    background-color: #32538F;
+    padding: 0 40px 10px 20px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn-list li {
+    border-bottom: solid 1px lightgray;
+}
+
+.btn-list button {
+    font-size: 17px;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.btn-list button:hover {
+    color: lightgray;
+    text-decoration: none;
+}
+
+.aside {
+    width: 70%;
+    float: left;
+}
+
 footer {
     color: #fff;
     padding: 10px;

@@ -8,28 +8,39 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="assets/js/moment.js"></script>
+    <script src="assets/js/main.js"></script>
     <title>Recent Jobs Added</title>
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="index.html">Job Seeker</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
-            class="navbar-toggler-icon"></span> </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item "> <a class="nav-link" href="employer.html">Employers Post Jobs <span
-                        class="sr-only">(current)</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" href="recentjobs.html">Recent Jobs Added</a> </li>
-        </ul>
-    </div>
-</nav>
-<br>
-<body>
-    <button type="button"  id="recent-btn" class="btn btn-link">Recent Jobs Added</button>
-    <div id="recent-jobs"></div>
 
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="/">Job Seeker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+                class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item "> <a class="nav-link" href="employer.html">Employers Post Jobs <span
+                            class="sr-only">(current)</span></a> </li>
+                <li class="nav-item active"> <a class="nav-link" href="recentjobs.html">Recent Jobs Added</a> </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="options">
+        <menu class="menu">
+            <ul class="btn-list">
+                <li><button type="button" id="recent-btn" class="btn btn-link">Recent Jobs Added</button></li>
+                <li><button type="button" id="applied-btn" class="btn btn-link">Jobs Applied</button></li>
+            </ul>
+        </menu>
+
+        <aside class="aside">
+            <div id="recent-jobs"></div>
+            <div id="applied-jobs"></div>
+            <div id="jobs"></div>
+        </aside>
+    </section>
 
 </body>
 

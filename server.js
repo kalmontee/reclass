@@ -20,5 +20,5 @@ app.use(routes);
 
 // Begin our server to listen to client request
 app.listen(PORT, function() {
-    console.log("Server listening on: http://localhost" + PORT);
+    console.log("Server listening on: http://localhost:" + PORT);
 });
