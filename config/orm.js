@@ -84,7 +84,6 @@ const orm = {
         queryString += " WHERE ";
         queryString += condition;
 
-        console.log(queryString);
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
@@ -92,7 +91,7 @@ const orm = {
     },
 
     delete(table, condition, cb) {
-        let queryString = 'DELETE FROM ' + table + ' WHERE ' + condition;
+        let queryString = "DELETE FROM " + table + " WHERE " + condition;
 
         connection.query(queryString, (err, results) => {
             if (err) throw err;

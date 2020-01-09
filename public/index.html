@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- JS & jQuery -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="assets/js/main.js"></script>
     <title>Project 2</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="index.html">Job Seeker</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a class="navbar-brand" href="/">Job Seeker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
                 class="navbar-toggler-icon"></span> </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item "> <a class="nav-link" href="employer.html">Employers Post Jobs <span
                             class="sr-only">(current)</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" href="recentjobs.html">Recent Jobs Added</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="recentjobs.html">Recent Jobs Added</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -30,10 +31,10 @@
         <form id="jobSearch">
             <div class="row">
                 <div class="col">
-                    <h3>What are you seeking?</h3> <input type="text" id="jobTitle" class="form-control" placeholder="Job Title">
+                    <h3>What are you seeking?</h3> <input type="search" id="jobTitle" class="form-control" placeholder="Job Title">
                 </div>
                 <div class="col">
-                    <h3>Where?</h3> <input type="text" id="cityState" class="form-control" placeholder="Input State">
+                    <h3>Where?</h3> <input type="search" id="cityState" class="form-control" placeholder="Input State">
                 </div>
                 <hr> <button type="submit" id="findJobs" class="btn btn-primary">Find Jobs</button> <br>
             </div>
