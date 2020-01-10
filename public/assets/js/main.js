@@ -205,9 +205,9 @@ $(document).ready(function() {
 
         }).then(function() {
             console.log("changed job to", appliedJob);
-
-            alert("Successful! You apply to the new Job.");
-            location.reload(); // Reload the page to get the updated list
+            $("#recent-modal").modal("toggle");
+            // alert("Successful! You apply to the new Job.");
+            // location.reload(); // Reload the page to get the updated list
 
         });
     });
