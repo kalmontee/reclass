@@ -54,26 +54,21 @@ router.post("/jobs", function(req, res) {
 // Update the client Recent jobs and main page with apply btn.
 router.put("/jobs/:id", function(req, res) {
     let condition = "id = " + req.params.id;
+    jobs.update({
+      applied_to: req.body.applied_to
+  }, condition, function(result) {
+
+
+      if (result.changedRows == 0) {
+          // If no rows were changed, then the ID must not exist, so 404
+          return res.status(404).end();
+      } else {
+          res.json({ id: req.params.id });
+      }
+  });
   
   });
  
-
-
-    jobs.update({
-        applied_to: req.body.applied_to
-    }, condition, function(result) {
-
-
-        if (result.changedRows == 0) {
-            // If no rows were changed, then the ID must not exist, so 404
-            return res.status(404).end();
-        } else {
-            res.json({ id: req.params.id });
-        }
-    });
-
-});
-
 // Delete jobs from Jobs Applied section and modal
 router.delete("/jobs/:id", function(req, res) {
     let condition = "id = " + req.params.id;
