@@ -154,6 +154,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < len; i++) {
                 var addedJob = recentArr[i].job_created;
+
                 var test = addedJob.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
                 var isAvail = false;
                 console.log(isAvail);
@@ -169,6 +170,7 @@ $(document).ready(function() {
                             recentArr[i].job_description + "<br>" +
                             recentArr[i].job_requirements + "</p>" +
                             "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply</button></div></div>";
+
                     }
                     recentJob.append(createdJob);
                     isAvail = true
@@ -184,10 +186,12 @@ $(document).ready(function() {
     // Apply for a job button
     $(document).on("click", ".applyJob", function(event) {
         event.preventDefault();
+
         var jobId = $(this).data("id");
         var appliedJob = $(this).data("apply") === true;
 
         console.log(jobId); // button that was clicked
+
 
         var newApplied = {
             applied_to: appliedJob
@@ -201,8 +205,10 @@ $(document).ready(function() {
 
         }).then(function() {
             console.log("changed job to", appliedJob);
-            alert("Successful! You apply to the new Job.");
-            location.reload(); // Reload the page to get the updated list
+            $("#recent-modal").modal("toggle");
+            // alert("Successful! You apply to the new Job.");
+            // location.reload(); // Reload the page to get the updated list
+
         });
     });
 
