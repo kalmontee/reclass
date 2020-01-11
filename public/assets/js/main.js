@@ -140,12 +140,12 @@ $(document).ready(function() {
         event.preventDefault();
         $("#heading").empty();
 
+        // Moment.js
         var currentDate = moment().format("YYYY-MM-DD");
 
         $.ajax("/jobs", {
             type: "GET"
         }).then(function(data) {
-            console.log(data);
             $('.jobsList').remove(); // Will clear all results for new searches
 
             var recentJob = $("#recent-jobs");
@@ -158,7 +158,6 @@ $(document).ready(function() {
                 var isAvail = false;
 
                 var heading = $("#heading").html("<h2>New Jobs Added!</h2>");
-                console.log(heading)
 
                 if (test === currentDate) {
                     for (var i = 0; i < len; i++) {
@@ -170,7 +169,7 @@ $(document).ready(function() {
                             "<i class='fas fa-dollar-sign'></i> " + "Salary: " + recentArr[i].job_salary + "<br>" +
                             "<i class='fas fa-clipboard'></i>" + recentArr[i].job_description + "<br>" +
                             "<i class='fas fa-code'></i>" + recentArr[i].job_requirements + "</p>" +
-                            "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply</button></div></div>";
+                            "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + recentArr[i].applied_to + "'>Apply</button></div></div>";
                     }
                     recentJob.append(createdJob);
                     isAvail = true
@@ -193,6 +192,7 @@ $(document).ready(function() {
 
         }).then(function(data) {
             $('.jobsList').remove(); // Will clear all results for new searches
+            var isAvail = false;
 
             var recentJobs = $("#applied-jobs");
             var jobsArr = data.jobs; // results of all jobs available in the database
@@ -214,9 +214,15 @@ $(document).ready(function() {
 
                 if (jobsArr[i].applied_to) {
                     recentJobs.append(jobs);
+                    isAvail = true;
                 }
 
-                "</button></div></div>";
+                jobs += "</button></div></div>";
+            }
+
+            if (!isAvail) {
+                alert("No Recent Jobs Added");
+                heading = $("#heading").html("<h2>You haven't applied to any jobs yet!</h2>");
             }
         });
     });
@@ -249,7 +255,7 @@ $(document).ready(function() {
                     "<i class='fas fa-dollar-sign'></i> " + "Salary: " + jobsArr[i].job_salary + "<br>" +
                     "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
                     "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
-                    "<div><button class='applyJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply</button></div></div>";
+                    "<div><button class='applyJob appliedJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply</button></div></div>";
                 availableJobs.append(jobs);
             }
         });
@@ -258,6 +264,7 @@ $(document).ready(function() {
     // Apply for a job btn
     $(document).on("click", ".applyJob", function(event) {
         event.preventDefault();
+
         var jobId = $(this).data("id");
         var appliedJob = $(this).data("apply") === true;
 
@@ -275,8 +282,8 @@ $(document).ready(function() {
 
         }).then(function() {
             console.log("changed job to", appliedJob);
-            alert("Successful! You apply to the new Job.");
-            location.reload(); // Reload the page to get the updated list
+            // alert("Successful! You apply to the new Job.");
+            // location.reload(); // Reload the page to get the updated list
         });
     });
 
