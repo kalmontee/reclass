@@ -153,7 +153,9 @@ $(document).ready(function() {
             var len = recentArr.length;
 
             for (var i = 0; i < len; i++) {
+
                 var addedJob = recentArr[i].job_created; // Gives the moment().format when a job was created
+
                 var test = addedJob.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
                 var isAvail = false;
 
@@ -171,6 +173,7 @@ $(document).ready(function() {
                             "<i class='fas fa-clipboard'></i>" + recentArr[i].job_description + "<br>" +
                             "<i class='fas fa-code'></i>" + recentArr[i].job_requirements + "</p>" +
                             "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply</button></div></div>";
+
                     }
                     recentJob.append(createdJob);
                     isAvail = true
@@ -182,6 +185,7 @@ $(document).ready(function() {
             }
         });
     });
+
 
     // Applied-btn will show all the results of the jobs the user applied
     $("#applied-btn").on("click", function(event) {
