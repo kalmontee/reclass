@@ -5,12 +5,6 @@ const jobs = require("../models/job.js");
 router.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
-// router.get("/employer", function(req, res) {
-//     res.sendFile(path.join(__dirname, "public/employer.html"));
-// });
-// router.get("/recentjobs", function(req, res) {
-//     res.sendFile(path.join(__dirname, "public/recentjobs.html"));
-// });
 
 // To receive all data from the database
 router.get("/jobs", function(req, res) {

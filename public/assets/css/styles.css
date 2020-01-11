@@ -1,9 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis|Montserrat+Alternates|Open+Sans+Condensed:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Gayathri|Montserrat|Open+Sans|Raleway&display=swap");
+body {
+    background-color: #f3f5f7;
+    /* font-family: 'Open Sans Condensed', sans-serif; */
+    /* New ones */
+    /* font-family: 'Gayathri', sans-serif; */
+}
+
+
 /*********Header***********/
 
 header {
     /* background-color: white; */
-    background-color: #343a40!important;
-    padding: 10px 0;
+    background-color: #343a40 !important;
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    color: white;
+    padding: 6px 0;
 }
 
 .movil-bar {
@@ -16,73 +33,53 @@ header {
 div.divide {
     display: flex;
     justify-content: space-between;
-}
-
-div.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-flow: wrap;
-    /* flex-direction: column; */
+    padding: 0 30px;
 }
 
 div.logo {
     font-size: 30px;
-    color: rgb(199, 199, 199);
     font-weight: bold;
+    font-family: "Montserrat Alternates", sans-serif;
+    color: rgb(199, 199, 199);
 }
 
 div.logo i {
     color: rgb(58, 143, 223);
 }
 
-div.header-items ul {
-    list-style: none;
-    display: flex;
-    flex-flow: wrap;
+.header-items {
+    position: relative;
+    top: 10px;
 }
 
-@media only screen and (max-width: 768px) {
-    div.header-items {
-        display: none;
-    }
-    div.header-items ul {
-        flex-direction: column;
-        display: flex;
-    }
+div.header-items ul {
+    display: flex;
+    justify-content: right;
 }
 
 div.header-items ul li a {
-    margin: 10px;
     text-decoration: none;
-    /* color: gray; */
     color: #fff;
     padding: 10px;
+    font-size: 17px;
     /* transition: all 0.5s ease; */
 }
 
 div.header-items ul li a:hover {
     background-color: rgb(58, 143, 223);
     color: white;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 7px 10px;
+    border-radius: 10px;
 }
 
 div.header-items ul li .btn-find {
-    background-color: rgb(58, 143, 223);
+    color: rgb(58, 143, 223);
     font-weight: bold;
-    color: white;
-    padding: 10px 10px;
-    border-radius: 6px;
-}
-
-div.header-items ul li .btn-find i {
-    margin-right: 20px;
 }
 
 div.header-items ul li .btn-sign {
     color: rgb(58, 143, 223);
-    font-weight: bold;
+    padding: 7px 10px;
 }
 
 div.header-items ul li .btn-sign i {
@@ -92,6 +89,10 @@ div.header-items ul li .btn-sign i {
 @media only screen and (max-width: 768px) {
     .movil-bar {
         display: initial;
+    }
+    div.header-items ul {
+        flex-direction: column;
+        display: flex;
     }
     div.header-items {
         display: none;
@@ -133,18 +134,27 @@ div.header-items ul li .btn-sign i {
 }
 
 
-/* Body */
+/********** Body ************/
 
-section {
-    background-color: #F3F5F7;
+.jobsField {
+    background-color: #f3f5f7;
     overflow: hidden;
     min-height: 100vh;
 }
 
-.form {
-    background-color: #32538F;
-    padding-bottom: 20px;
+.divForm {
+    background-color: #32538f;
+    padding-bottom: 35px;
     color: #fff;
+}
+
+.divForm h3 {
+    font-family: "Dosis", sans-serif;
+    font-size: 1.4rem;
+}
+
+.divForm input {
+    font-family: "Open Sans", sans-serif;
 }
 
 #jobSearch {
@@ -153,18 +163,15 @@ section {
     padding: 30px 0;
 }
 
-h3 {
-    font-size: 1.30rem;
-}
-
 #findJobs {
     font-size: 16px;
     height: 40px;
     position: relative;
-    top: 31px;
+    top: 33px;
 }
 
 #heading {
+    font-family: "Dosis", sans-serif;
     text-align: center;
     padding: 20px 0;
 }
@@ -172,28 +179,98 @@ h3 {
 .jobsList {
     background: #fff;
     border-radius: 5px;
-    padding: 10px 30px;
-    margin-bottom: 20px;
+    padding: 15px 30px;
+    margin-bottom: 30px;
     color: #000;
     -webkit-box-shadow: 0px 0px 20px -5px #000000;
     box-shadow: 0px 0px 20px -5px #b1b1b1;
 }
 
-.info {
+.jobsList .info {
     padding-bottom: 20px;
+    font-size: 16px;
     border-bottom: solid 1px rgb(192, 192, 192);
+}
+
+.jobsList .info i {
+    margin: 0 10px 0 0;
+}
+
+
+/* Emplyers.html section */
+
+
+/* article p {
+    padding-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    line-height: 1.7;
+    color: rgb(112, 112, 112);
+} */
+
+#employer-btn {
+    margin-bottom: 20px;
+}
+
+.employerForm {
+    padding: 30px 0;
+}
+
+.jumbotron-fluid {
+    margin: 0;
+    background-image: url(../img/main-photo.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 75px 0;
+}
+
+.form-group label {
+    font-size: 18px;
+}
+
+.formField {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 20px -5px #000000;
+    box-shadow: 0px 0px 20px -5px #b1b1b1;
+}
+
+.display-4 {
+    color: #fff;
+    font-size: 60px;
+}
+
+.lead {
+    color: #fff;
+    font-size: 30px;
+}
+
+.employerForm form h2 {
+    padding: 20px 0;
+    font-family: "Dosis", sans-serif;
+}
+
+
+/* RecentJobs.html section */
+
+.options {
+    /* background-color: #F3F5F7; */
+    background-color: #979797;
+    overflow: hidden;
+    min-height: 100vh;
 }
 
 .menu {
     width: 30%;
     float: left;
-    background-color: #32538F;
+    background-color: #32538f;
     padding: 0 40px 10px 20px;
     border-bottom-right-radius: 5px;
 }
 
 .btn-list li {
     border-bottom: solid 1px lightgray;
+    margin-bottom: 20px;
 }
 
 .btn-list button {
@@ -217,18 +294,16 @@ h3 {
 
 footer {
     /* background-color: rgb(39, 39, 39); */
-    background-color: #343a40!important;
+    background-color: #343a40 !important;
 }
 
 div.logo-footer {
     text-align: center;
-    margin-bottom: 20px;
-}
-
-div.logo-footer {
-    font-size: 30px;
-    color: white;
+    margin-bottom: 5px;
+    font-size: 25px;
     font-weight: bold;
+    font-family: "Montserrat Alternates", sans-serif;
+    color: rgb(199, 199, 199);
 }
 
 div.logo-footer i {
@@ -262,7 +337,17 @@ div.footer-end p {
     margin: 0;
     color: white;
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+div.resources ul li a {
+    font-size: 18px;
+    padding: 5px;
+    color: #fff;
+}
+
+div.resources ul li a:hover {
+    color: rgb(58, 143, 223);
 }
 
 @media only screen and (max-width: 768px) {
