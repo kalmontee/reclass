@@ -1,10 +1,9 @@
-# Reclass
 ### Project 2/Web Seek
 
 A full stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters.  This application also allows potential employers to post any web development openings they wish to fill.  The application is very user friendly, intuitive and mobile responsive.
 
 # Link to Dev Seek
-
+To https://git.heroku.com/peaceful-lowlands-14767.git
 
 # How the app works
 
