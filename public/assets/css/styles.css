@@ -254,7 +254,6 @@ div.header-items ul li .btn-sign i {
 /* RecentJobs.html section */
 
 .options {
-    /* background-color: #F3F5F7; */
     background-color: #979797;
     overflow: hidden;
     min-height: 100vh;
@@ -265,7 +264,10 @@ div.header-items ul li .btn-sign i {
     float: left;
     background-color: #32538f;
     padding: 0 40px 10px 20px;
-    border-bottom-right-radius: 5px;
+    border-radius: 6px;
+    margin: 87px 25px 0 10px;
+    -webkit-box-shadow: 0px 0px 20px -5px #000000;
+    box-shadow: 0px 0px 20px -5px #b1b1b1;
 }
 
 .btn-list li {
@@ -284,8 +286,12 @@ div.header-items ul li .btn-sign i {
     text-decoration: none;
 }
 
+.recent-heading {
+    color: #fff;
+}
+
 .aside {
-    width: 70%;
+    width: 65%;
     float: left;
 }
 
