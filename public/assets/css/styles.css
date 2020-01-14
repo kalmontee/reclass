@@ -8,10 +8,9 @@ body {
 }
 
 
-/*********Header***********/
+/*****************Header*********************/
 
 header {
-    /* background-color: white; */
     background-color: #343a40 !important;
     font-family: "Open Sans", sans-serif;
     position: relative;
@@ -19,7 +18,6 @@ header {
     left: 0;
     width: 100%;
     margin: 0;
-    color: white;
     padding: 6px 0;
 }
 
@@ -27,13 +25,19 @@ header {
     display: none;
     font-size: 30px;
     margin-right: 10px;
+    color: #fff;
     cursor: pointer;
+}
+
+.header-container {
+    display: flex;
 }
 
 div.divide {
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
+    width: 55%;
 }
 
 div.logo {
@@ -49,7 +53,7 @@ div.logo i {
 
 .header-items {
     position: relative;
-    top: 10px;
+    top: 13px;
 }
 
 div.header-items ul {
@@ -59,10 +63,9 @@ div.header-items ul {
 
 div.header-items ul li a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(199, 199, 199);
     padding: 10px;
     font-size: 17px;
-    /* transition: all 0.5s ease; */
 }
 
 div.header-items ul li a:hover {
@@ -70,11 +73,6 @@ div.header-items ul li a:hover {
     color: white;
     padding: 7px 10px;
     border-radius: 10px;
-}
-
-div.header-items ul li .btn-find {
-    color: rgb(58, 143, 223);
-    font-weight: bold;
 }
 
 div.header-items ul li .btn-sign {
@@ -86,55 +84,78 @@ div.header-items ul li .btn-sign i {
     margin-right: 10px;
 }
 
+@media only screen and (max-width: 980px) {
+    .header-container {
+        display: inline;
+    }
+    div.header-items ul li a {
+        margin: 0 7px;
+        text-decoration: none;
+        color: rgb(199, 199, 199);
+    }
+}
+
 @media only screen and (max-width: 768px) {
+    .header-container {
+        display: inline;
+    }
     .movil-bar {
         display: initial;
-    }
-    div.header-items ul {
-        flex-direction: column;
-        display: flex;
-    }
-    div.header-items {
-        display: none;
-    }
-    div.header-items ul {
-        flex-direction: column;
-        justify-content: space-between;
     }
     div.divide {
         display: flex;
         justify-content: space-between;
         width: 100%;
     }
-}
-
-@media only screen and (max-width: 768px) {
-    div.header-items ul li .btn-find {
-        background-color: rgb(58, 143, 223);
-        font-weight: bold;
-        font-size: 14px;
-        color: #ffff;
-        margin-right: 0;
-        border-radius: 6px;
-        float: right;
+    div.header-items {
+        display: none;
+    }
+    div.header-items ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 20px;
     }
     div.header-items ul li a:hover {
-        background-color: rgb(58, 143, 223);
+        background-color: transparent;
         color: white;
-        border-radius: 5px;
-        font-weight: bold;
+        padding: 0;
+        margin: 0;
     }
     div.header-items ul li a {
-        margin: 7px;
         text-decoration: none;
-        color: gray;
-        padding: 2px;
-        transition: all 0.5s ease;
+        color: rgb(199, 199, 199);
+        padding: 40px 0;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    div.header-items ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+    div.header-items ul li a {
+        text-decoration: none;
+        color: rgb(199, 199, 199);
+        padding: 0;
+        margin: 0;
+    }
+    div.header-items ul li a:hover {
+        background-color: transparent;
+        color: white;
+        padding: 0;
+        margin: 0;
+    }
+    div.header-items ul li {
+        padding: 3px 0;
     }
 }
 
 
-/********** Body ************/
+/****************** Index.html Section *****************/
 
 .jobsField {
     background-color: #f3f5f7;
@@ -196,17 +217,31 @@ div.header-items ul li .btn-sign i {
     margin: 0 10px 0 0;
 }
 
+@media only screen and (max-width: 640px) {
+    #jobSearch {
+        width: 80%;
+        padding: 0 15px;
+    }
+    .flex {
+        flex-flow: column;
+    }
+    .flex .col {
+        padding: 40px 0;
+    }
+    #findJobs {
+        position: relative;
+        top: 25px;
+    }
+}
 
-/* Emplyers.html section */
+@media only screen and (max-width: 768px) {
+    #jobSearch {
+        width: 90%;
+    }
+}
 
 
-/* article p {
-    padding-top: 30px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    line-height: 1.7;
-    color: rgb(112, 112, 112);
-} */
+/***************** Emplyers.html section ****************/
 
 #employer-btn {
     margin-bottom: 20px;
@@ -251,7 +286,7 @@ div.header-items ul li .btn-sign i {
 }
 
 
-/* RecentJobs.html section */
+/***************** RecentJobs.html section ******************/
 
 .options {
     background-color: #979797;
@@ -263,7 +298,7 @@ div.header-items ul li .btn-sign i {
     width: 30%;
     float: left;
     background-color: #32538f;
-    padding: 0 40px 10px 20px;
+    padding: 10px 40px 10px 20px;
     border-radius: 6px;
     margin: 87px 25px 0 10px;
     -webkit-box-shadow: 0px 0px 20px -5px #000000;
@@ -295,11 +330,24 @@ div.header-items ul li .btn-sign i {
     float: left;
 }
 
+@media only screen and (max-width: 640px) {
+    .menu {
+        width: 95%;
+        margin: 30px 25px 0 10px;
+    }
+    .aside {
+        width: 95%;
+        margin: 0 25px 0 10px;
+    }
+    footer {
+        padding: 0 10px;
+    }
+}
+
 
 /*******Footer*******/
 
 footer {
-    /* background-color: rgb(39, 39, 39); */
     background-color: #343a40 !important;
 }
 
