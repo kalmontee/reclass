@@ -1,4 +1,15 @@
 $(document).ready(function() {
+
+    $('.movil-bar').on('click', function(event) {
+        event.preventDefault();
+
+        // Set a variable document to the header-items
+        var headerItems = document.querySelector('.header-items');
+
+        // if else statement to toggle the movil-bar
+        headerItems.style.display === 'none' ? headerItems.style.display = 'block' : headerItems.style.display = 'none';
+    });
+
     $("#jobSearch").on("submit", function(event) {
         event.preventDefault();
         $("#heading").empty();
@@ -18,7 +29,7 @@ $(document).ready(function() {
             var title = $("#jobTitle").val().trim();
             var state = $("#cityState").val().trim();
 
-            // "/test" is coming from the ORM to get the specific request from the database. selectOne function
+            // "/addedJob" is coming from the ORM to get the specific request from the database. selectOne function
             $.ajax("/jobs/" + title + "/" + state, {
                 type: "GET"
 
@@ -29,6 +40,7 @@ $(document).ready(function() {
                 $("#cityState").val(''); // Will clear input
 
                 var heading = $("#heading").html("<h2>Results for " + title + " in " + state + "</h2>");
+                var isAvail = false;
 
                 var recentJobs = $("#jobs_added");
                 var jobsArr = data.jobs;
@@ -44,34 +56,27 @@ $(document).ready(function() {
                         "<i class='fas fa-dollar-sign'></i> " + "Salary: " + jobsArr[i].job_salary + "<br>" +
                         "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
                         "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
-                        "<div><button class='applyJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply</button></div></div>";
-                    recentJobs.append(jobs);
+                        "<div><button class='applyJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply"
+
+                    if (!jobsArr[i].applied_to) {
+                        recentJobs.append(jobs);
+                        isAvail = true;
+
+                    } else if (jobsArr[i].applied_to) {
+                        // This will hide all the jobs that the user clicked to applied for any job.
+                        $(this).hide();
+                    }
+
+                    jobs += "</button></div></div>";
+                }
+
+                // If no results available was found
+                if (!isAvail) {
+                    $("#validation-modal").modal("toggle");
+                    // heading = $("#heading").html("<h2>No Results found for " + title + " in " + state + "</h2>");
+                    heading = $("#heading").html(" ");
                 }
             });
-            // ==============================Leave this alone for now=================================
-
-            // Second AJAX GET request -- Will only return all jobs in the current state
-            // $.ajax("/jobs/" + state, {
-            //     type: "GET",
-            // }).then(function(data) {
-            //     console.log(data)
-
-            //     var recentJobs = $("#jobs_added");
-            //     var jobsArr = data.jobs;
-            //     var len = jobsArr.length; // The length of all data.jobs
-
-            //     // Loop through the database to get the exact results for each job.
-            //     for (var i = 0; i < len; i++) {
-            //         var jobs = "<div class='jobsList'>" +
-            //             "<h5 class='job_title'>" + jobsArr[i].job_title + "</h5>" +
-            //             "<h6 class='company_name'>" + jobsArr[i].company_name + "</h6>" +
-            //             "<p class='info'>" + jobsArr[i].job_city + ", " + jobsArr[i].job_state + "<br>" +
-            //             "Salary: " + jobsArr[i].job_salary + "<br>" +
-            //             jobsArr[i].job_description + "<br>" +
-            //             jobsArr[i].job_requirements + "</p></div>";
-            //         recentJobs.append(jobs);
-            //     }
-            // })
 
         } else {
             alert("Please fill out all fields before submitting!");
@@ -115,8 +120,6 @@ $(document).ready(function() {
                 dataType: "json",
                 contentType: "application/json"
             }).then(function(data) {
-                console.log(data);
-
                 // Open the model after the user submits
                 $("#results-modal").modal("toggle");
 
@@ -147,47 +150,45 @@ $(document).ready(function() {
             type: "GET"
 
         }).then(function(data) {
-
-            $('.jobsList').remove(); // Will clear all results for new searches
+            // Will clear all results for new searches
+            $('.jobsList').remove();
 
             var recentJob = $("#recent-jobs");
             var recentArr = data.jobs
             var len = recentArr.length;
+            var isAvail = false;
+            var heading = $("#heading").html("<h2>New Jobs Added!</h2>");
 
             for (var i = 0; i < len; i++) {
+                var created = recentArr[i].job_created; // Gives the moment().format when a job was created
+                var addedJob = created.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
 
-                var addedJob = recentArr[i].job_created; // Gives the moment().format when a job was created
+                var createdJob = "<div class='jobsList'>" +
+                    "<h5 class='job_title'>" + recentArr[i].job_title + "</h5>" +
+                    "<h6 class='company_name'>" + recentArr[i].company_name + "</h6>" +
+                    "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + recentArr[i].job_city + ", " +
+                    recentArr[i].job_state + "<br>" +
+                    "<i class='fas fa-dollar-sign'></i> " + "Salary: " + recentArr[i].job_salary + "<br>" +
+                    "<i class='fas fa-clipboard'></i>" + recentArr[i].job_description + "<br>" +
+                    "<i class='fas fa-code'></i>" + recentArr[i].job_requirements + "</p>" +
+                    "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply"
 
-                var test = addedJob.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
-                var isAvail = false;
-
-                var heading = $("#heading").html("<h2>New Jobs Added!</h2>");
-
-                if (test === currentDate) {
-                    for (var i = 0; i < len; i++) {
-                        var createdJob = "<div class='jobsList'>" +
-                            "<h5 class='job_title'>" + recentArr[i].job_title + "</h5>" +
-                            "<h6 class='company_name'>" + recentArr[i].company_name + "</h6>" +
-                            "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + recentArr[i].job_city + ", " +
-                            recentArr[i].job_state + "<br>" +
-                            "<i class='fas fa-dollar-sign'></i> " + "Salary: " + recentArr[i].job_salary + "<br>" +
-                            "<i class='fas fa-clipboard'></i>" + recentArr[i].job_description + "<br>" +
-                            "<i class='fas fa-code'></i>" + recentArr[i].job_requirements + "</p>" +
-                            "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply</button></div></div>";
-                    }
+                if (addedJob === currentDate) {
                     recentJob.append(createdJob);
-                    isAvail = true
+                    isAvail = true;
                 }
-            };
+
+                createdJob += "</button></div></div>";
+            }
 
             if (!isAvail) {
+                heading = $("#heading").html("<h2>No Recent Jobs Added..</h2>");
                 alert("No Recent Jobs Added");
             }
         });
     });
 
-
-    // Applied-btn will show all the results of the jobs the user applied
+    // Applied - btn will show all the results of the jobs the user applied
     $("#applied-btn").on("click", function(event) {
         event.preventDefault();
         $("#heading").empty();
@@ -198,14 +199,14 @@ $(document).ready(function() {
         }).then(function(data) {
             $('.jobsList').remove(); // Will clear all results for new searches
             var isAvail = false;
-
-            var recentJobs = $("#applied-jobs");
+            var appliedJobs = $("#applied-jobs");
             var jobsArr = data.jobs; // results of all jobs available in the database
             var len = jobsArr.length; // The length of all data.jobs (number)
 
             var heading = $("#heading").html("<h2>Results for All Jobs Applied!</h2>");
 
-            // Loop through the database to get the exact results for each job.
+            // Loop through the database to get the exact results
+            // for each job.
             for (var i = 0; i < len; i++) {
                 var jobs = "<div class='jobsList'>" +
                     "<h5 class='job_title'>" + jobsArr[i].job_title + "</h5>" +
@@ -218,7 +219,7 @@ $(document).ready(function() {
                     "<div><button class='delete btn btn-danger' data-id='" + jobsArr[i].id + "'>Delete"
 
                 if (jobsArr[i].applied_to) {
-                    recentJobs.append(jobs);
+                    appliedJobs.append(jobs);
                     isAvail = true;
                 }
 
@@ -226,11 +227,11 @@ $(document).ready(function() {
             }
 
             if (!isAvail) {
-                alert("No Recent Jobs Added");
                 heading = $("#heading").html("<h2>You haven't applied to any jobs yet!</h2>");
             }
         });
     });
+
 
     // ALL jobs available coming from the database
     $("#available-btn").on("click", function(event) {
@@ -247,7 +248,6 @@ $(document).ready(function() {
             var heading = $("#heading").html("<h2>Jobs Available!</h2>");
 
             var availableJobs = $("#available-jobs");
-            var appliedJobs = $("#applied-jobs");
             var jobsArr = data.jobs;
             var len = jobsArr.length; // The length of all data.jobs
 
@@ -263,8 +263,17 @@ $(document).ready(function() {
                     "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
                     "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
 
-                    "<div><button class='applyJob appliedJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply</button></div></div>";
-                appliedJobs.append(jobs);
+                    "<div><button class='applyJob appliedJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply"
+
+                if (!jobsArr[i].applied_to) {
+                    availableJobs.append(jobs);
+
+                } else if (jobsArr[i].applied_to) {
+                    // This will hide all the jobs that the user clicked to applied for any job.
+                    $(this).hide();
+                }
+
+                jobs += "</button></div></div>";
             }
         });
     });
@@ -276,8 +285,7 @@ $(document).ready(function() {
         var jobId = $(this).data("id");
         var appliedJob = $(this).data("apply") === true;
 
-        $(this).text("Applied!");
-        $(this).addClass("btn btn-secondary");
+        $(this).text("Applied!").addClass("btn btn-secondary");
 
         var newApplied = {
             applied_to: appliedJob
@@ -289,9 +297,7 @@ $(document).ready(function() {
             dataType: "json",
             contentType: "application/json"
 
-        }).then(function() {
-            console.log("changed job to", appliedJob);
-
+        }).then(function(data) {
             $("#recent-modal").modal("toggle");
             // location.reload(); // Reload the page to get the updated list
         });
@@ -308,11 +314,11 @@ $(document).ready(function() {
             type: "DELETE",
 
         }).then(function() {
-            console.log("Job has been deleted.");
             location.reload();
         });
     });
+
+
 });
 
-// Need to work on Employers post modal delete button.
 // Need to work on to receive specific keywords for inputs results when searching job_title and job_state

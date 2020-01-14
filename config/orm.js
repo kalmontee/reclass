@@ -35,24 +35,9 @@ const orm = {
         });
     },
 
-    selectOne(tableName, columnName, columnName2, value, value2, cb) {
-        // SELECT * FROM jobs WHERE (job_title, job_state) = ('Junior Developer', 'New York');
-        let queryString = `SELECT * FROM ${tableName} WHERE (${columnName}, ${columnName2}) = ('${value}', '${value2}');`;
-
-        // SELECT * FROM jobs WHERE ((job_title LIKE '%Engineer%') + (job_state LIKE '%Florida'));
-        // let queryString2 = `SELECT * FROM ${tableName} WHERE (${columnName} LIKE '%${value}%');`;
-        // console.log(queryString2);
-
-        connection.query(queryString, (err, results) => {
-            if (err) throw err;
-            cb(results);
-        });
-    },
-
-    stateKeywords(tableName, columnName, value, cb) {
-        // SELECT * FROM jobs WHERE ((job_title LIKE '%Engineer%') + (job_state LIKE '%Florida'));
-        let queryString = `SELECT * FROM ${tableName} WHERE (${columnName} LIKE '%${value}%');`;
-        console.log(queryString);
+    jobTitleKeywords(tableName, columnName, columnName2, value, value2, cb) {
+        // SELECT * FROM jobs WHERE job_title LIKE '%engineer%developer' OR job_state LIKE '%New Jersey%';
+        let queryString = `SELECT * FROM ${tableName} WHERE ${columnName} LIKE "%${value}%developer" OR ${columnName2} LIKE '%${value2}%';`;
 
         connection.query(queryString, (err, results) => {
             if (err) throw err;

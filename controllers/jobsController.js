@@ -18,23 +18,13 @@ router.get("/recentjobs", function(req, res) {
 // To receive all data from the database
 router.get("/jobs", function(req, res) {
     jobs.all(function(data) {
-        // console.log(data);
         res.json({ jobs: data });
     });
 });
 
-// To receive the exact data from inputs (job_title and job_state);
+// For specific keywords to match in the database for job_title and job_state -- Send back request to the client
 router.get("/jobs/:title/:state", function(req, res, next) {
-    // get req.params to define column names and column values for job_title and job_state
-    jobs.selectOne(["job_title"], ["job_state"], [req.params.title], [req.params.state], function(data) {
-        res.json({ jobs: data });
-        next();
-    });
-});
-
-// For specific keywords to match in the database -- Send back request to the client
-router.get("/jobs/:state", function(req, res, next) {
-    jobs.stateKeywords(["job_state"], [req.params.state], function(data) {
+    jobs.jobTitleKeywords(["job_title"], ["job_state"], [req.params.title], [req.params.state], function(data) {
         res.json({ jobs: data });
         next();
     });
@@ -51,7 +41,6 @@ router.post("/jobs", function(req, res) {
         // Send back the ID of the new job
         res.json({ id: result.insertId });
     });
-
 });
 
 // Update the client Recent jobs and main page with apply btn.

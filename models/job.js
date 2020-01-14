@@ -6,13 +6,8 @@ const job = {
             cb(res);
         });
     },
-    selectOne(col, col2, vals, vals2, cb) { // ColumnOne, ColumnTwo, value, value2, cb
-        orm.selectOne("jobs", col, col2, vals, vals2, function(res) {
-            cb(res);
-        });
-    },
-    stateKeywords(col, vals, cb) {
-        orm.stateKeywords("jobs", col, vals, function(res) {
+    jobTitleKeywords(col, col2, vals, vals2, cb) { // ColumnOne, ColumnTwo, value, value2, cb
+        orm.jobTitleKeywords("jobs", col, col2, vals, vals2, function(res) {
             cb(res);
         });
     },
