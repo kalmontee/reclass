@@ -37,7 +37,7 @@ div.divide {
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
-    width: 55%;
+    width: 50%;
 }
 
 div.logo {
@@ -64,7 +64,7 @@ div.header-items ul {
 div.header-items ul li a {
     text-decoration: none;
     color: rgb(199, 199, 199);
-    padding: 10px;
+    padding: 0 10px;
     font-size: 17px;
 }
 
