@@ -5,7 +5,7 @@ A full stack, MVC (Model-View-Controller) dual application that allows job seeke
 ## Demo
 To view the app go to:
 
-https://mighty-basin-29152.herokuapp.com/
+[devseek.herokuapp.com](https://devseek.herokuapp.com/)
 
 # How the App Works
 This application is set up to service both web development applicants and employers looking to hire them. The job seeker starts by filling out a form with the job title and the state where they wish to look for a job.  This will query the database(Read) and match them with the parameters typed into the form. This action will populate dynamically onto the DOM a list of jobs.  At that point the job seeker will have the opportunity to apply to any job listed by hitting the apply button(Update). This will change the apply button text to "applied"(Also updating the database) and will add that job to jobs applied tab, where the job seeker will have the opportunity to delete(Delete) that application.  The app also has a recent jobs added tab, where only jobs that were posted by an employer within the last 24 hours will populate.  There the job seeker will have the ability to apply and delete(Same as the form).
