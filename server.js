@@ -2,7 +2,6 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const moment = require("moment");
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(path.join(__dirname, "public")));
@@ -19,6 +18,4 @@ const routes = require("./controllers/jobsController.js");
 app.use(routes);
 
 // Begin our server to listen to client request
-app.listen(PORT, function() {
-    console.log("Server listening on: http://localhost:" + PORT);
-});
+app.listen(PORT, () => console.log(`Server listening on: http://localhost:${PORT}`));
