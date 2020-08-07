@@ -2,156 +2,185 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/reset.css">
+   <!-- Primary Meta Tags -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="author" content="Kelvin Almonte & Felix Fernandez">
+   <meta name="title" content="Dev Seek">
+   <meta name="description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
+   <meta property="image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <!-- Open Graph / Facebook -->
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://devseek.herokuapp.com/">
+   <meta property="og:title" content="Dev Seek">
+   <meta property="og:description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
+   <meta property="og:image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <!-- Twitter -->
+   <meta property="twitter:card" content="summary_large_image">
+   <meta property="twitter:url" content="https://devseek.herokuapp.com/">
+   <meta property="twitter:title" content="Dev Seek">
+   <meta property="twitter:description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
+   <meta property="twitter:image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
 
-    <script src="assets/js/moment.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <!-- Font Awesome -->
+   <link rel="stylesheet" href="assets/css/all.min.css">
 
-    <script src="assets/js/main.js"></script>
-    <title>Job Search</title>
+   <!-- CSS/Bootstrap CDN -->
+   <link rel="stylesheet" href="assets/css/reset.css">
+   <link rel="stylesheet" href="assets/css/spinner.css">
+   <link rel="stylesheet" href="assets/css/styles.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+   <!-- JS, Popper.js, and jQuery -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"></script>
+
+   <script src="assets/js/moment.js"></script>
+   <script src="assets/js/main.js"></script>
+   <title>Job Search</title>
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-            <div class="divide">
-                <div class="logo">
-                    <i class="fas fa-atom"></i>
-                    <span>Dev Seek</span>
-                </div>
-
-                <div class="movil-bar">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-            <div class="header-items">
-                <ul>
-                    <li><a href="/">Search Jobs</a></li>
-                    <li><a href="/employer">Employer Post Job</a></li>
-                    <li><a href="/recentjobs">Recent Jobs Added</a></li>
-                    <li><a class="btn-sign" href="#"><i class="fas fa-sign-in-alt"></i>Sign In</a></li>
-                    <li><a class="btn-sign" href="#"><i class="fas fa-user-plus"></i>Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    <div class="divForm">
-        <form id="jobSearch">
-            <div class="row flex">
-                <div class="col">
-                    <h3>What are you seeking?</h3> <input type="search" id="jobTitle" class="form-control" placeholder="Job Title">
-                </div>
-                <div class="col">
-                    <h3>Where?</h3> <input type="search" id="cityState" class="form-control" placeholder="Input State">
-                </div>
-                <hr> <button type="submit" id="findJobs" class="btn btn-primary">Find Jobs</button> <br>
-            </div>
-        </form>
-    </div>
-
-    <section class="jobsField">
-        <div class="container">
-            <div id="heading"></div>
-            <div id="jobs_added"></div>
-        </div>
-
-        <div id="recent-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h2 class="modal-title"><strong>Thank you</strong></h2>
-                    </div>
-                    <div class="modal-body">
-                        <p>You've successfully applied.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="validation-modal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title"><strong>We apologize..</strong></h2>
-                </div>
-                <div class="modal-body">
-                    <p>There are no current jobs available in your current option. <br> Please continue searching.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!----------Footer Section--------------->
-    <footer>
-        <div class="logo-footer">
+   <header>
+      <div class="header-container">
+         <div id="logo">
             <i class="fas fa-atom"></i>
             <span>Dev Seek</span>
-        </div>
-        <div>
-            <div class="footer-info container">
-                <div class="resources">
-                    <h6>CONTACT</h6>
-                    <div class="resources-info">
-                        <h5><a href="#">Contact Us</a></h5>
-                        <h5><a href="#">Help Center</a></h5>
-                    </div>
-                </div>
-                <div class="resources">
-                    <h6>ABOUT</h6>
-                    <div class="resources-info">
-                        <h5><a href="#">Salary</a></h5>
-                        <h5><a href="#">Jobs</a></h5>
-                        <h5><a href="#">Community</a></h5>
-                    </div>
-                </div>
-                <div class="resources">
-                    <h6>PLATFORM</h6>
-                    <ul class="social-links">
-                        <li><a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                        </li>
-                        <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-                <div class="resources">
-                    <h6>RESOURCES</h6>
-                    <div class="resources-info">
-                        <h5><a href="#">Blog</a></h5>
-                        <h5><a href="#">Services</a></h5>
-                    </div>
-                </div>
+         </div>
+
+         <div class="movil-bar">
+            <i class="fas fa-bars"></i>
+         </div>
+
+         <nav>
+            <a href="/">Search Jobs</a>
+            <a href="/employer">Employer Post Job</a>
+            <a href="/recentjobs">Recent Jobs Added</a>
+         </nav>
+      </div>
+   </header>
+
+   <div class="divForm">
+      <form id="jobSearch">
+         <div class="row flex">
+            <div class="col">
+               <h3>What are you seeking?</h3> <input type="search" id="jobTitle" class="form-control"
+                  placeholder="Job Title">
             </div>
-            <div class="footer-end container">
-                <p>&copy 2020 Dev Seek Inc. All rights reserved.</p>
+            <div class="col">
+               <h3>Where?</h3> <input type="search" id="cityState" class="form-control" placeholder="Input State">
             </div>
-        </div>
-    </footer>
+            <hr> <button type="submit" id="findJobs" class="btn btn-primary">Find Jobs</button> <br>
+         </div>
+      </form>
+   </div>
+
+   <section class="jobsField">
+      <div class="container">
+         <div id="heading"></div>
+         <div class="loader">Loading...</div>
+         <div id="jobs_added"></div>
+      </div>
+
+      <div id="recent-modal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+
+                  <h2 class="modal-title"><strong>Thank you</strong></h2>
+               </div>
+               <div class="modal-body">
+                  <p>You've successfully applied.</p>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Modal -->
+   <div id="validation-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <h2 class="modal-title"><strong>We apologize..</strong></h2>
+            </div>
+            <div class="modal-body">
+               <p>There are no current jobs available in your current option. <br> Please continue searching.</p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!----------Footer Section--------------->
+   <footer>
+      <div class="logo-footer">
+         <i class="fas fa-atom"></i>
+         <span>Dev Seek</span>
+      </div>
+      <div>
+         <div class="footer-info container">
+            <div class="resources">
+               <h6>CONTACT</h6>
+               <div class="resources-info">
+                  <h5><a href="#">Contact Us</a></h5>
+                  <h5><a href="#">Help Center</a></h5>
+               </div>
+            </div>
+            <div class="resources">
+               <h6>ABOUT</h6>
+               <div class="resources-info">
+                  <h5><a href="#">Salary</a></h5>
+                  <h5><a href="#">Jobs</a></h5>
+                  <h5><a href="#">Community</a></h5>
+               </div>
+            </div>
+            <div class="resources">
+               <h6>PLATFORM</h6>
+               <ul class="social-links">
+                  <li><a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                  </li>
+                  <li><a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                  <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+               </ul>
+            </div>
+            <div class="resources">
+               <h6>RESOURCES</h6>
+               <div class="resources-info">
+                  <h5><a href="#">Blog</a></h5>
+                  <h5><a href="#">Services</a></h5>
+               </div>
+            </div>
+         </div>
+         <div class="footer-end container">
+            <p>&copy 2020 Dev Seek Inc. All rights reserved.</p>
+         </div>
+      </div>
+   </footer>
 </body>
 
 </html>
