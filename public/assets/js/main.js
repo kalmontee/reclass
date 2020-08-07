@@ -1,324 +1,311 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  // Initial set for the loading spinner.
+  let loader = $(".loader").hide();
+  let heading = $("#heading").empty(); // Title of each heading
 
-    $('.movil-bar').on('click', function(event) {
-        event.preventDefault();
+  // Active class for recent jobs added menu section
+  $(".btn").click(function () {
+    $(".btn").removeClass("active");
+    $(this).addClass("active");
+  });
 
-        // Set a variable document to the header-items
-        var headerItems = document.querySelector('.header-items');
+  // Mobil responsive on click bar. 
+  $('.movil-bar').on('click', function () {
+    // Set a variable document to the header nav
+    let headerNav = document.querySelector("header nav");
 
-        // if else statement to toggle the movil-bar
-        headerItems.style.display === 'none' ? headerItems.style.display = 'block' : headerItems.style.display = 'none';
-    });
+    // if else statement to toggle the movil-bar
+    headerNav.style.display === 'none' ? headerNav.style.display = 'block' : headerNav.style.display = 'none';
+  });
 
-    $("#jobSearch").on("submit", function(event) {
-        event.preventDefault();
-        $("#heading").empty();
+  // Main Page
+  // Searching for job title and State jobs
+  $("#jobSearch").on("submit", function (event) {
+    event.preventDefault();
+    $("#heading").empty();
+    loader.show();
 
-        // Form validation for empty input field
-        function validateForm() {
-            var isValid = true;
-            $(".form-control").each(function() {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-            return isValid;
+    // Form validation for empty input field
+    function validateForm() {
+      let isValid = true;
+      $(".form-control").each(function () {
+        if ($(this).val() === "") {
+          isValid = false;
         }
+      });
+      return isValid;
+    }
 
-        if (validateForm()) {
-            var title = $("#jobTitle").val().trim();
-            var state = $("#cityState").val().trim();
+    if (validateForm()) {
+      const title = $("#jobTitle").val().trim();
+      const state = $("#cityState").val().trim();
 
-            // "/addedJob" is coming from the ORM to get the specific request from the database. selectOne function
-            $.ajax("/jobs/" + title + "/" + state, {
-                type: "GET"
+      // Target the title and state as parameters to receive the right data back. jobTitleKeywords function
+      $.ajax(`/jobs/${title}/${state}`, { type: "GET" })
+        .then(function (data) {
+          $('.jobsList').remove(); // Will clear all results for new searches
+          $("#jobTitle").val(''); // Will clear input
+          $("#cityState").val(''); // Will clear input
+          loader.hide()
 
-            }).then(function(data) {
-                console.log(data);
-                $('.jobsList').remove(); // Will clear all results for new searches
-                $("#jobTitle").val(''); // Will clear input
-                $("#cityState").val(''); // Will clear input
+          heading.html(`<h2>${title} jobs in ${state}</h2>`);
+          let isAvail = false;
+          let recentJobs = $("#jobs_added");
+          const jobsArr = data.jobs;
 
-                var heading = $("#heading").html("<h2>Results for " + title + " in " + state + "</h2>");
-                var isAvail = false;
+          // Loop through the database to get the exact results for each job.
+          jobsArr.forEach(element => {
+            // Refractor the code
+            // Line 304 for more info
+            let jobs = jobsData(element);
 
-                var recentJobs = $("#jobs_added");
-                var jobsArr = data.jobs;
-                var len = jobsArr.length; // The length of all data.jobs
+            if (!element.applied_to) {
+              recentJobs.append(jobs);
+              isAvail = true;
+            } else if (element.applied_to) {
+              // This will hide the selected job that the user clicked to applied for any job.
+              $(this).hide();
+            }
 
-                // Loop through the database to get the exact results for each job.
-                for (var i = 0; i < len; i++) {
-                    var jobs = "<div class='jobsList'>" +
-                        "<h5 class='job_title'>" + jobsArr[i].job_title + "</h5>" +
-                        "<h6 class='company_name'>" + jobsArr[i].company_name + "</h6>" +
-                        "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + jobsArr[i].job_city + ", " +
-                        jobsArr[i].job_state + "<br>" +
-                        "<i class='fas fa-dollar-sign'></i> " + "Salary: " + jobsArr[i].job_salary + "<br>" +
-                        "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
-                        "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
-                        "<div><button class='applyJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply"
+            jobs += `</button></div></div>`;
+          });
 
-                    if (!jobsArr[i].applied_to) {
-                        recentJobs.append(jobs);
-                        isAvail = true;
+          // If no results available was found
+          if (!isAvail) {
+            // Open the model after the user submits and no results were found
+            $("#validation-modal").modal("toggle");
 
-                    } else if (jobsArr[i].applied_to) {
-                        // This will hide all the jobs that the user clicked to applied for any job.
-                        $(this).hide();
-                    }
+            // Placed no heading in the html page
+            heading.html(" ");
+          }
+        });
 
-                    jobs += "</button></div></div>";
-                }
+    } else {
+      alert("Please fill out all fields before submitting!");
+      loader.hide();
+    }
+  });
 
-                // If no results available was found
-                if (!isAvail) {
-                    $("#validation-modal").modal("toggle");
-                    // heading = $("#heading").html("<h2>No Results found for " + title + " in " + state + "</h2>");
-                    heading = $("#heading").html(" ");
-                }
-            });
+  // Employers Post HTML Section
+  $("#employer-btn").on("click", function (event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
 
-        } else {
-            alert("Please fill out all fields before submitting!");
+    // When the job post was created. Giving it the day, month, and year for job_created
+    const newDate = moment().format("YYYY-MM-DD");
+
+    // validation form to submit all inputs. No inputs must be left blank.
+    function validateForm() {
+      let isValid = true;
+      $(".form-control").each(function () {
+        if ($(this).val() === "") {
+          isValid = false;
         }
-    });
+      });
 
-    // Employers Post HTML Section
-    $("#employer-btn").on("click", function(event) {
-        // Make sure to preventDefault on a submit event.
-        event.preventDefault();
-        var newDate = moment().format("YYYY-MM-DD");
+      return isValid;
+    }
 
-        function validateForm() {
-            var isValid = true;
-            $(".form-control").each(function() {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
+    if (validateForm()) {
+      let newJob = {
+        company: $("#company-name").val().trim(),
+        title: $("#job-title").val().trim(),
+        state: $("#state").val().trim(),
+        city: $("#city").val().trim(),
+        salary: $("#salary").val().trim(),
+        job_description: $("#job-desc").val().trim(),
+        job_requirements: $("#job-req").val().trim(),
+        applied_to: 0,
+        job_created: newDate
+      };
 
-            return isValid;
+      // Send the POST request.
+      $.ajax("/jobs", {
+        type: "POST",
+        data: JSON.stringify(newJob),
+        dataType: "json",
+        contentType: "application/json"
+      })
+        .then(function () {
+          // Open the model after the user submits
+          $("#results-modal").modal("toggle");
+
+          // Clear all the input fields after the user submits.
+          $("#company-name").val('');
+          $("#job-title").val('');
+          $("#state").val('');
+          $("#city").val('');
+          $("#salary").val('');
+          $("#job-desc").val('');
+          $("#job-req").val('');
+        });
+    } else {
+      alert("Please fill out all fields before submitting!");
+    }
+  });
+
+  // Recent Jobs added btn -- will display all the recents jobs posted within 24 hours.
+  $("#recent-btn").click(function (event) {
+    event.preventDefault();
+    loader.show();
+
+    // Moment.js
+    const currentDate = moment().format("YYYY-MM-DD");
+
+    $.ajax("/jobs", { type: "GET" })
+      .then((data) => {
+        // Will clear all results for new searches
+        $('.jobsList').remove();
+        heading.html("<h2>New Jobs Added!</h2>");
+        loader.hide();
+
+        let recentJobs = $("#recent-jobs");
+        const recentArr = data.jobs;
+        let isAvail = false;
+
+        // Loop through the database to get the exact results for each job.
+        recentArr.forEach(element => {
+          let created = element.job_created; // Gives the moment().format date when a job was created
+          let addedJob = created.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
+
+          // Refractor the code
+          // Line 304 for more info
+          let jobs = jobsData(element);
+
+          // If the new job post created equals the same time as the current date
+          if (addedJob === currentDate) {
+            recentJobs.append(jobs);
+            isAvail = true; // Will alert that there's jobs available
+          }
+
+          jobs += `</button></div></div>`
+        });
+
+        if (!isAvail) {
+          heading.html("<h2>No Recent Jobs Added..</h2>");
+          $("#recent-jobs-added-modal").modal("toggle");
         }
+      });
+  });
 
-        if (validateForm()) {
-            var newJob = {
-                company: $("#company-name").val().trim(),
-                title: $("#job-title").val().trim(),
-                state: $("#state").val().trim(),
-                city: $("#city").val().trim(),
-                salary: $("#salary").val().trim(),
-                job_description: $("#job-desc").val().trim(),
-                job_requirements: $("#job-req").val().trim(),
-                applied_to: 0,
-                job_created: newDate
-            };
+  // Jobs Applied btn - will show all the results of the jobs the user applied
+  $("#applied-btn").on("click", function (event) {
+    event.preventDefault();
+    loader.show();
 
-            // Send the POST request.
-            $.ajax("/jobs", {
-                type: "POST",
-                data: JSON.stringify(newJob),
-                dataType: "json",
-                contentType: "application/json"
-            }).then(function(data) {
-                // Open the model after the user submits
-                $("#results-modal").modal("toggle");
+    $.ajax("/jobs", { type: "GET" })
+      .then(function (data) {
+        $('.jobsList').remove(); // Will clear all results for new searches
+        loader.hide();
+        heading.html("<h2>All Jobs Applied!</h2>");
+        let isAvail = false;
+        let appliedJobs = $("#applied-jobs");
+        const jobsArr = data.jobs; // results of all jobs available in the database
 
-                // Clear all the input fields after the user submits.
-                $("#company-name").val('');
-                $("#job-title").val('');
-                $("#state").val('');
-                $("#city").val('');
-                $("#salary").val('');
-                $("#job-desc").val('');
-                $("#job-req").val('');
-            });
-        } else {
-            alert("Please fill out all fields before submitting!");
+        jobsArr.forEach(element => {
+          let jobs = `<div class='jobsList'>
+          <h5 class='job_title'>${element.job_title}</h5>
+          <h6 class='company_name'>${element.company_name}</h6>
+          <p class='info'><i class='fas fa-map-marker-alt'></i>${element.job_city}, ${element.job_state} <br>
+          <i class='fas fa-dollar-sign'></i> Salary: ${element.job_salary} <br>
+          <i class='fas fa-clipboard'></i>${element.job_description} <br>
+          <i class='fas fa-code'></i>${element.job_requirements}</p>
+          <div><button id='delete' class='btn btn-danger' data-id='${element.id}'>Delete`;
 
+          if (element.applied_to) {
+            appliedJobs.append(jobs);
+            isAvail = true;
+          }
+          jobs += `</button></div></div>`;
+        });
+
+        if (!isAvail) {
+          heading.html("<h2>You haven't applied to any jobs yet!</h2>");
         }
-    });
+      });
+  });
 
-    // Recent btn -- will display all the recents jobs posted
-    $("#recent-btn").click(function(event) {
-        event.preventDefault();
-        $("#heading").empty();
+  // A GET request for all jobs available
+  $("#available-btn").on("click", function (event) {
+    event.preventDefault();
+    $("#heading").empty();
+    loader.show();
 
-        // Moment.js
-        var currentDate = moment().format("YYYY-MM-DD");
+    $.ajax("/jobs", { type: "GET" })
+      .then(function (data) {
+        $('.jobsList').remove(); // Will clear all results for new searches
+        heading.html("<h2>Jobs Available!</h2>");
+        loader.hide();
 
-        $.ajax("/jobs", {
-            type: "GET"
+        let availableJobs = $("#available-jobs"); // Checks for available jobs.
+        let jobsArr = data.jobs; // Receiving data back from all the jobs
 
-        }).then(function(data) {
-            // Will clear all results for new searches
-            $('.jobsList').remove();
+        // Loop through the database to get the exact results for each job.
+        jobsArr.forEach(element => {
+          // Refractor the code
+          // Line 304 for more info
+          let jobs = jobsData(element);
 
-            var recentJob = $("#recent-jobs");
-            var recentArr = data.jobs
-            var len = recentArr.length;
-            var isAvail = false;
-            var heading = $("#heading").html("<h2>New Jobs Added!</h2>");
+          if (!element.applied_to) {
+            availableJobs.append(jobs)
+          } else if (element.applied_to) {
+            // This will hide the selected job that the user clicked to applied for any job.
+            $(this).hide();
+          }
 
-            for (var i = 0; i < len; i++) {
-                var created = recentArr[i].job_created; // Gives the moment().format when a job was created
-                var addedJob = created.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
-
-                var createdJob = "<div class='jobsList'>" +
-                    "<h5 class='job_title'>" + recentArr[i].job_title + "</h5>" +
-                    "<h6 class='company_name'>" + recentArr[i].company_name + "</h6>" +
-                    "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + recentArr[i].job_city + ", " +
-                    recentArr[i].job_state + "<br>" +
-                    "<i class='fas fa-dollar-sign'></i> " + "Salary: " + recentArr[i].job_salary + "<br>" +
-                    "<i class='fas fa-clipboard'></i>" + recentArr[i].job_description + "<br>" +
-                    "<i class='fas fa-code'></i>" + recentArr[i].job_requirements + "</p>" +
-                    "<div><button class='applyJob btn btn-primary' data-id='" + recentArr[i].id + "' data-apply='" + !recentArr[i].applied_to + "'>Apply"
-
-                if (addedJob === currentDate) {
-                    recentJob.append(createdJob);
-                    isAvail = true;
-                }
-
-                createdJob += "</button></div></div>";
-            }
-
-            if (!isAvail) {
-                heading = $("#heading").html("<h2>No Recent Jobs Added..</h2>");
-                alert("No Recent Jobs Added");
-            }
+          jobs += `</button></div></div>`;
         });
-    });
 
-    // Applied - btn will show all the results of the jobs the user applied
-    $("#applied-btn").on("click", function(event) {
-        event.preventDefault();
-        $("#heading").empty();
+      });
+  });
 
-        $.ajax("/jobs", {
-            type: "GET"
+  // Apply for a job btn
+  $(document).on("click", ".applyJob", function (event) {
+    event.preventDefault();
+    // To target each job with it's own ID
+    let jobId = $(this).data("id");
 
-        }).then(function(data) {
-            $('.jobsList').remove(); // Will clear all results for new searches
-            var isAvail = false;
-            var appliedJobs = $("#applied-jobs");
-            var jobsArr = data.jobs; // results of all jobs available in the database
-            var len = jobsArr.length; // The length of all data.jobs (number)
+    // Once the user clicks apply change the status to true
+    let appliedJob = $(this).data("apply") === true;
 
-            var heading = $("#heading").html("<h2>Results for All Jobs Applied!</h2>");
+    // Once the user clicks apply change the text and the color of the btn.
+    $(this).text("Applied!").addClass("btn btn-secondary");
 
-            // Loop through the database to get the exact results
-            // for each job.
-            for (var i = 0; i < len; i++) {
-                var jobs = "<div class='jobsList'>" +
-                    "<h5 class='job_title'>" + jobsArr[i].job_title + "</h5>" +
-                    "<h6 class='company_name'>" + jobsArr[i].company_name + "</h6>" +
-                    "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + jobsArr[i].job_city + ", " +
-                    jobsArr[i].job_state + "<br>" +
-                    "<i class='fas fa-dollar-sign'></i> " + "Salary: " + jobsArr[i].job_salary + "<br>" +
-                    "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
-                    "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
-                    "<div><button class='delete btn btn-danger' data-id='" + jobsArr[i].id + "'>Delete"
+    let newApplied = {
+      applied_to: appliedJob
+    };
 
-                if (jobsArr[i].applied_to) {
-                    appliedJobs.append(jobs);
-                    isAvail = true;
-                }
+    $.ajax(`/jobs/${jobId}`, {
+      type: "PUT",
+      data: JSON.stringify(newApplied),
+      dataType: "json",
+      contentType: "application/json"
+    })
+      .then(function () {
+        $("#recent-modal").modal("toggle");
+      })
+  });
 
-                jobs += "</button></div></div>";
-            }
+  // Sending a request to the sever to delete a job post
+  $(document).on("click", "#delete", function (event) {
+    event.preventDefault();
 
-            if (!isAvail) {
-                heading = $("#heading").html("<h2>You haven't applied to any jobs yet!</h2>");
-            }
-        });
-    });
+    // This is going to target the selected ID
+    var jobId = $(this).data("id");
 
+    $.ajax(`/jobs/${jobId}`, { type: "DELETE" })
+      .then(() => location.reload());
+  });
 
-    // ALL jobs available coming from the database
-    $("#available-btn").on("click", function(event) {
-        event.preventDefault();
-        $("#heading").empty();
+}); // end of closing document.ready function
 
-        $.ajax("/jobs", {
-            type: "GET"
-
-        }).then(function(data) {
-            console.log(data);
-            $('.jobsList').remove(); // Will clear all results for new searches
-
-            var heading = $("#heading").html("<h2>Jobs Available!</h2>");
-
-            var availableJobs = $("#available-jobs");
-            var jobsArr = data.jobs;
-            var len = jobsArr.length; // The length of all data.jobs
-
-            // Loop through the database to get the exact results for each job.
-            for (var i = 0; i < len; i++) {
-
-                var jobs = "<div class='jobsList'>" +
-                    "<h5 class='job_title'>" + jobsArr[i].job_title + "</h5>" +
-                    "<h6 class='company_name'>" + jobsArr[i].company_name + "</h6>" +
-                    "<p class='info'> <i class='fas fa-map-marker-alt '></i>" + jobsArr[i].job_city + ", " +
-                    jobsArr[i].job_state + "<br>" +
-                    "<i class='fas fa-dollar-sign'></i> " + "Salary: " + jobsArr[i].job_salary + "<br>" +
-                    "<i class='fas fa-clipboard'></i>" + jobsArr[i].job_description + "<br>" +
-                    "<i class='fas fa-code'></i>" + jobsArr[i].job_requirements + "</p>" +
-
-                    "<div><button class='applyJob appliedJob btn btn-primary' data-id='" + jobsArr[i].id + "' data-apply='" + !jobsArr[i].applied_to + "'>Apply"
-
-                if (!jobsArr[i].applied_to) {
-                    availableJobs.append(jobs);
-
-                } else if (jobsArr[i].applied_to) {
-                    // This will hide all the jobs that the user clicked to applied for any job.
-                    $(this).hide();
-                }
-
-                jobs += "</button></div></div>";
-            }
-        });
-    });
-
-    // Apply for a job btn
-    $(document).on("click", ".applyJob", function(event) {
-        event.preventDefault();
-
-        var jobId = $(this).data("id");
-        var appliedJob = $(this).data("apply") === true;
-
-        $(this).text("Applied!").addClass("btn btn-secondary");
-
-        var newApplied = {
-            applied_to: appliedJob
-        };
-
-        $.ajax("/jobs/" + jobId, {
-            type: "PUT",
-            data: JSON.stringify(newApplied),
-            dataType: "json",
-            contentType: "application/json"
-
-        }).then(function(data) {
-            $("#recent-modal").modal("toggle");
-            // location.reload(); // Reload the page to get the updated list
-        });
-    });
-
-    // Sending a request to the sever to delete a job post
-    $(document).on("click", ".delete", function(event) {
-        event.preventDefault();
-
-        // This is going to target the selected ID
-        var jobId = $(this).data("id");
-
-        $.ajax("/jobs/" + jobId, {
-            type: "DELETE",
-
-        }).then(function() {
-            location.reload();
-        });
-    });
-
-
-});
-
-// Need to work on to receive specific keywords for inputs results when searching job_title and job_state
+function jobsData(element) {
+  return `<div class='jobsList'>
+          <h5 class='job_title'>${element.job_title}</h5>
+          <h6 class='company_name'>${element.company_name}</h6>
+          <p class='info'><i class='fas fa-map-marker-alt'></i>${element.job_city}, ${element.job_state} <br>
+          <i class='fas fa-dollar-sign'></i> Salary: ${element.job_salary} <br>
+          <i class='fas fa-clipboard'></i>${element.job_description} <br>
+          <i class='fas fa-code'></i>${element.job_requirements}</p>
+          <div><button class='applyJob appliedJob btn btn-primary' data-id='${element.id}' data-apply='${!element.applied_to}'>Apply`;
+}
