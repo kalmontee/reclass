@@ -43,10 +43,10 @@ $(document).ready(function () {
       // Target the title and state as parameters to receive the right data back. jobTitleKeywords function
       $.ajax(`/jobs/${title}/${state}`, { type: "GET" })
         .then(function (data) {
-          $('.jobsList').remove(); // Will clear all results for new searches
+          $('.jobsList').hide(); // Will clear all results for new searches
           $("#jobTitle").val(''); // Will clear input
           $("#cityState").val(''); // Will clear input
-          loader.hide()
+          loader.hide();
 
           heading.html(`<h2>${title} jobs in ${state}</h2>`);
           let isAvail = false;
@@ -58,16 +58,9 @@ $(document).ready(function () {
             // Refractor the code
             // Line 304 for more info
             let jobs = jobsData(element);
+            isAvail = true;
 
-            if (!element.applied_to) {
-              recentJobs.append(jobs);
-              isAvail = true;
-            } else if (element.applied_to) {
-              // This will hide the selected job that the user clicked to applied for any job.
-              $(this).hide();
-            }
-
-            jobs += `</button></div></div>`;
+            recentJobs.append(jobs);
           });
 
           // If no results available was found
@@ -160,16 +153,15 @@ $(document).ready(function () {
         loader.hide();
 
         let recentJobs = $("#recent-jobs");
-        const recentArr = data.jobs;
         let isAvail = false;
+        const recentArr = data.jobs;
 
         // Loop through the database to get the exact results for each job.
         recentArr.forEach(element => {
           let created = element.job_created; // Gives the moment().format date when a job was created
           let addedJob = created.slice(0, 10); // Gives the date the job was created (ex: 2020-01-09)
 
-          // Refractor the code
-          // Line 304 for more info
+          // Line 276 for more info
           let jobs = jobsData(element);
 
           // If the new job post created equals the same time as the current date
@@ -177,8 +169,6 @@ $(document).ready(function () {
             recentJobs.append(jobs);
             isAvail = true; // Will alert that there's jobs available
           }
-
-          jobs += `</button></div></div>`
         });
 
         if (!isAvail) {
@@ -193,12 +183,11 @@ $(document).ready(function () {
     event.preventDefault();
     loader.show();
 
-    $.ajax("/jobs", { type: "GET" })
-      .then(function (data) {
+    $.ajax("/jobs/applied", { type: "GET" })
+      .then(data => {
         $('.jobsList').remove(); // Will clear all results for new searches
         loader.hide();
         heading.html("<h2>All Jobs Applied!</h2>");
-        let isAvail = false;
         let appliedJobs = $("#applied-jobs");
         const jobsArr = data.jobs; // results of all jobs available in the database
 
@@ -210,18 +199,10 @@ $(document).ready(function () {
           <i class='fas fa-dollar-sign'></i> Salary: ${element.job_salary} <br>
           <i class='fas fa-clipboard'></i>${element.job_description} <br>
           <i class='fas fa-code'></i>${element.job_requirements}</p>
-          <div><button id='delete' class='btn btn-danger' data-id='${element.id}'>Delete`;
+          <div><button id='delete' class='btn btn-danger' data-id='${element.id}'>Delete</button></div></div>`;
 
-          if (element.applied_to) {
-            appliedJobs.append(jobs);
-            isAvail = true;
-          }
-          jobs += `</button></div></div>`;
+          appliedJobs.append(jobs);
         });
-
-        if (!isAvail) {
-          heading.html("<h2>You haven't applied to any jobs yet!</h2>");
-        }
       });
   });
 
@@ -231,29 +212,20 @@ $(document).ready(function () {
     $("#heading").empty();
     loader.show();
 
-    $.ajax("/jobs", { type: "GET" })
+    $.ajax("/jobs/available", { type: "GET" })
       .then(function (data) {
         $('.jobsList').remove(); // Will clear all results for new searches
         heading.html("<h2>Jobs Available!</h2>");
         loader.hide();
 
         let availableJobs = $("#available-jobs"); // Checks for available jobs.
-        let jobsArr = data.jobs; // Receiving data back from all the jobs
+        const jobsArr = data.jobs; // Receiving data back from all the jobs
 
         // Loop through the database to get the exact results for each job.
         jobsArr.forEach(element => {
-          // Refractor the code
-          // Line 304 for more info
+          // Line 276 for more info
           let jobs = jobsData(element);
-
-          if (!element.applied_to) {
-            availableJobs.append(jobs)
-          } else if (element.applied_to) {
-            // This will hide the selected job that the user clicked to applied for any job.
-            $(this).hide();
-          }
-
-          jobs += `</button></div></div>`;
+          availableJobs.append(jobs);
         });
 
       });
@@ -263,10 +235,10 @@ $(document).ready(function () {
   $(document).on("click", ".applyJob", function (event) {
     event.preventDefault();
     // To target each job with it's own ID
-    let jobId = $(this).data("id");
+    const jobId = $(this).data("id");
 
     // Once the user clicks apply change the status to true
-    let appliedJob = $(this).data("apply") === true;
+    const appliedJob = $(this).data("apply") === true;
 
     // Once the user clicks apply change the text and the color of the btn.
     $(this).text("Applied!").addClass("btn btn-secondary");
@@ -283,7 +255,7 @@ $(document).ready(function () {
     })
       .then(function () {
         $("#recent-modal").modal("toggle");
-      })
+      });
   });
 
   // Sending a request to the sever to delete a job post
@@ -291,7 +263,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     // This is going to target the selected ID
-    var jobId = $(this).data("id");
+    const jobId = $(this).data("id");
 
     $.ajax(`/jobs/${jobId}`, { type: "DELETE" })
       .then(() => location.reload());
@@ -307,5 +279,5 @@ function jobsData(element) {
           <i class='fas fa-dollar-sign'></i> Salary: ${element.job_salary} <br>
           <i class='fas fa-clipboard'></i>${element.job_description} <br>
           <i class='fas fa-code'></i>${element.job_requirements}</p>
-          <div><button class='applyJob appliedJob btn btn-primary' data-id='${element.id}' data-apply='${!element.applied_to}'>Apply`;
+          <div><button class='applyJob appliedJob btn btn-primary' data-id='${element.id}' data-apply='${!element.applied_to}'>Apply</button></div></div>`;
 }
