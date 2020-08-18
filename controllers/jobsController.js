@@ -20,16 +20,38 @@ router.get("/jobs", (req, res) => {
   jobs.all((data) => res.json({ jobs: data }));
 });
 
-// For specific keywords to match in the database for job_title and job_state -- Send back request to the client
+// For specific keywords to match in the database for 
+// job_title, job_state and for jobs that are available or havent apply to yet.
 router.get("/jobs/:title/:state", (req, res, next) => {
-  jobs.jobTitleKeywords(["job_title"], ["job_state"], [req.params.title], [req.params.state], (data) => {
+  jobs.jobTitleKeywords(["job_title"], ["job_state"], [req.params.title], [req.params.state], ["applied_to"], (data) => {
     res.json({ jobs: data });
     next();
   });
 });
 
+// Sending back all results the user has applied to jobs.
+router.get("/jobs/applied", (req, res) => {
+  jobs.jobsApplied(["applied_to"], (data) => res.json({ jobs: data }));
+});
+
+// Sending back all results the user hasn't applied to jobs.
+router.get("/jobs/available", (req, res) => {
+  jobs.jobsAvailable(["applied_to"], (data) => res.json({ jobs: data }));
+});
+
 // Employer.html -- Sending a POST request to the server. 
 router.post("/jobs", (req, res) => {
+  const {
+    company,
+    title,
+    state,
+    city,
+    salary,
+    job_description,
+    job_requirements,
+    applied_to,
+    job_created } = req.body;
+
   jobs.create(
     [
       "company_name",
@@ -43,33 +65,33 @@ router.post("/jobs", (req, res) => {
       "job_created"
     ],
     [
-      req.body.company,
-      req.body.title,
-      req.body.state,
-      req.body.city,
-      req.body.salary,
-      req.body.job_description,
-      req.body.job_requirements,
-      req.body.applied_to,
-      req.body.job_created
-
-      // Send back the ID of the new job
-    ], (result) => res.json({ id: result.insertId }));
+      company,
+      title,
+      state,
+      city,
+      salary,
+      job_description,
+      job_requirements,
+      applied_to,
+      job_created
+    ],
+    // Send back the ID of the new job
+    (result) => res.json({ id: result.insertId }));
 });
 
 // Update the client Recent jobs and main page with apply btn.
 router.put("/jobs/:id", (req, res) => {
   const condition = `id = ${req.params.id}`;
+  const { applied_to } = req.body;
+  const { id } = req.params;
 
-  jobs.update({
-    applied_to: req.body.applied_to
-  }, condition, (result) => {
+  jobs.update({ applied_to: applied_to }, condition, (result) => {
 
     if (result.changedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
     } else {
-      res.json({ id: req.params.id });
+      res.json({ id: id });
     }
   });
 });

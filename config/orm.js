@@ -28,16 +28,33 @@ objToSql = (ob) => {
 
 const orm = {
   all(tableInput, cb) {
-    let queryString = `SELECT * FROM jobs ${tableInput}`;
+    const queryString = `SELECT * FROM jobs ${tableInput}`;
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
     });
   },
 
-  jobTitleKeywords(jobs, job_title, job_state, value, value2, cb) {
-    // SELECT * FROM jobs WHERE job_title LIKE '%engineer%developer' OR job_state LIKE '%New Jersey%';
-    let queryString = `SELECT * FROM ${jobs} WHERE ${job_title} LIKE "%${value}%developer" OR ${job_state} LIKE '%${value2}%';`;
+  jobTitleKeywords(jobs, job_title, job_state, value, value2, applied_to, cb) {
+    // SELECT * FROM jobs WHERE job_title LIKE '%engineer%developer' OR job_state LIKE '%New Jersey%' AND NOT applied_to;
+    const queryString = `SELECT * FROM ${jobs} WHERE ${job_title} LIKE "%${value}%developer" OR ${job_state} LIKE '%${value2}%' AND NOT ${applied_to}`;
+    connection.query(queryString, (err, results) => {
+      if (err) throw err;
+      cb(results);
+    });
+  },
+
+  jobsApplied(jobs, applied_to, cb) {
+    const queryString = `SELECT * FROM ${jobs} WHERE ${applied_to}`;
+    connection.query(queryString, (err, results) => {
+      if (err) throw err;
+      cb(results);
+    });
+  },
+
+  // Displaying all the jobs available or the user hasn't applied to yet.
+  jobsAvailable(jobs, value, cb) {
+    const queryString = `SELECT * FROM ${jobs} WHERE NOT ${value}`;
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
@@ -74,7 +91,7 @@ const orm = {
   },
 
   delete(table, condition, cb) {
-    let queryString = `DELETE FROM ${table} WHERE ${condition}`;
+    const queryString = `DELETE FROM ${table} WHERE ${condition}`;
 
     connection.query(queryString, (err, results) => {
       if (err) throw err;
