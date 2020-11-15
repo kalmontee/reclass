@@ -1,192 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Primary Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="author" content="Kelvin Almonte & Felix Fernandez" />
+    <meta name="title" content="Dev Seek" />
+    <meta
+      name="description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill."
+    />
+    <meta
+      property="image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    />
 
-<head>
-   <!-- Primary Meta Tags -->
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <meta name="author" content="Kelvin Almonte & Felix Fernandez">
-   <meta name="title" content="Dev Seek">
-   <meta name="description"
-      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
-   <meta property="image"
-      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://devseek.herokuapp.com/" />
+    <meta property="og:title" content="Dev Seek" />
+    <meta
+      property="og:description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    />
 
-   <!-- Open Graph / Facebook -->
-   <meta property="og:type" content="website">
-   <meta property="og:url" content="https://devseek.herokuapp.com/">
-   <meta property="og:title" content="Dev Seek">
-   <meta property="og:description"
-      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
-   <meta property="og:image"
-      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://devseek.herokuapp.com/" />
+    <meta property="twitter:title" content="Dev Seek" />
+    <meta
+      property="twitter:description"
+      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill."
+    />
+    <meta
+      property="twitter:image"
+      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    />
 
-   <!-- Twitter -->
-   <meta property="twitter:card" content="summary_large_image">
-   <meta property="twitter:url" content="https://devseek.herokuapp.com/">
-   <meta property="twitter:title" content="Dev Seek">
-   <meta property="twitter:description"
-      content="A full-stack, MVC (Model-View-Controller) duel application that allows job seekers to search and apply for web development jobs all over country depending on their search parameters. This application also allows potential employers to post any web development openings they wish to fill.">
-   <meta property="twitter:image"
-      content="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/css/all.min.css" />
 
-   <!-- Font Awesome -->
-   <link rel="stylesheet" href="assets/css/all.min.css">
+    <!-- CSS/Bootstrap CDN -->
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+    <link rel="stylesheet" href="assets/css/scss/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
 
-   <!-- CSS/Bootstrap CDN -->
-   <link rel="stylesheet" href="assets/css/reset.css">
-   <link rel="stylesheet" href="assets/css/styles.css">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-   <!-- JS, Popper.js, and jQuery -->
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
 
-   <script src="assets/js/moment.js"></script>
-   <script src="assets/js/main.js"></script>
-   <title>Employer Post</title>
-</head>
+    <script src="assets/js/moment.js"></script>
+    <script src="assets/js/components/Header.js"></script>
+    <script src="assets/js/components/Footer.js"></script>
+    <script src="assets/js/main.js"></script>
+    <title>Employer Post</title>
+  </head>
 
-<body>
-   <header>
-      <div class="header-container">
-         <div id="logo">
-            <i class="fas fa-atom"></i>
-            <span>Dev Seek</span>
-         </div>
+  <body>
+    <header-component></header-component>
 
-         <div class="movil-bar">
-            <i class="fas fa-bars"></i>
-         </div>
-
-         <nav>
-            <a href="/">Search Jobs</a>
-            <a href="/employer">Employer Post Job</a>
-            <a href="/recentjobs">Recent Jobs Added</a>
-         </nav>
-      </div>
-   </header>
-
-   <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid">
       <div class="container">
-         <h1 class="display-4">Employer Post</h1>
-         <p class="lead">Find your dream candidate here!</p>
+        <h1 class="display-4">Employer Post</h1>
+        <p class="lead">Find your dream candidate here!</p>
       </div>
-   </div>
-   <section class="employerForm">
+    </div>
+    
+    <section class="employerForm">
       <div class="container formField">
-         <form>
-            <h2>Fill Out The Form Below!</h2>
-            <div class="form-group">
-               <label>Company Name</label>
-               <input type="text" class="form-control" id="company-name">
-            </div>
-            <div class="form-group">
-               <label>Job Title</label>
-               <input type="text" class="form-control" id="job-title" placeholder="Ex Web Developer">
-            </div>
+        <form>
+          <h2>Fill Out The Form Below!</h2>
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" class="form-control" id="company-name" />
+          </div>
+          <div class="form-group">
+            <label>Job Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="job-title"
+              placeholder="Ex Web Developer"
+            />
+          </div>
 
-            <div class="form-group">
-               <label>Type in State</label>
-               <input type="text" class="form-control" id="state" placeholder="Ex New Jersey">
-            </div>
-            <div class="form-group">
-               <label>Type in City</label>
-               <input type="text" class="form-control" id="city" placeholder="Ex Passaic">
-            </div>
+          <div class="form-group">
+            <label>Type in State</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              placeholder="Ex New Jersey"
+            />
+          </div>
+          <div class="form-group">
+            <label>Type in City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              placeholder="Ex Passaic"
+            />
+          </div>
 
-            <div class="form-group">
-               <label>Salary Desired</label>
-               <input type="text" class="form-control" id="salary" placeholder="Ex 65000">
-            </div>
+          <div class="form-group">
+            <label>Salary Desired</label>
+            <input
+              type="text"
+              class="form-control"
+              id="salary"
+              placeholder="Ex 65000"
+            />
+          </div>
 
-            <div class="form-group">
-               <label>Job Description</label>
-               <textarea class="form-control" id="job-desc" rows="3"></textarea>
-            </div>
+          <div class="form-group">
+            <label>Job Description</label>
+            <textarea class="form-control" id="job-desc" rows="3"></textarea>
+          </div>
 
-            <div class="form-group">
-               <label>Job Requirements</label>
-               <input type="text" class="form-control" id="job-req" placeholder="Ex HTML, CSS">
-            </div>
-         </form>
-         <button type="button" id="employer-btn" class="btn btn-primary">
-            Submit
-         </button>
+          <div class="form-group">
+            <label>Job Requirements</label>
+            <input
+              type="text"
+              class="form-control"
+              id="job-req"
+              placeholder="Ex HTML, CSS"
+            />
+          </div>
+        </form>
+        <button type="button" id="employer-btn" class="btn btn-primary">
+          Submit
+        </button>
       </div>
-   </section>
+    </section>
 
-   <!-- Modal -->
-   <div id="results-modal" class="modal fade" role="dialog">
+    <!-- Modal -->
+    <div id="results-modal" class="modal fade" role="dialog">
       <div class="modal-dialog">
-         <!-- Modal content-->
-         <div class="modal-content">
-            <div class="modal-header">
-               <h2 class="modal-title"><strong>Thank you for using our services!</strong></h2>
-            </div>
-            <div class="modal-body">
-               <p>You have successfully posted a new job to the site.</p>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-         </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">
+              <strong>Thank you for using our services!</strong>
+            </h2>
+          </div>
+          <div class="modal-body">
+            <p>You have successfully posted a new job to the site.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
-   </div>
+    </div>
 
-   <!----------Footer Section--------------->
-   <footer>
-      <div class="logo-footer">
-         <i class="fas fa-atom"></i>
-         <span>Dev Seek</span>
-      </div>
-      <div>
-         <div class="footer-info container">
-            <div class="resources">
-               <h6>CONTACT</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Contact Us</a></h5>
-                  <h5><a href="#">Help Center</a></h5>
-               </div>
-            </div>
-            <div class="resources">
-               <h6>ABOUT</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Salary</a></h5>
-                  <h5><a href="#">Jobs</a></h5>
-                  <h5><a href="#">Community</a></h5>
-               </div>
-            </div>
-            <div class="resources">
-               <h6>PLATFORM</h6>
-               <ul>
-                  <li><a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                  </li>
-                  <li><a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                  <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-               </ul>
-            </div>
-            <div class="resources">
-               <h6>RESOURCES</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Blog</a></h5>
-                  <h5><a href="#">Services</a></h5>
-               </div>
-            </div>
-         </div>
-         <div class="footer-end container">
-            <p>&copy 2020 Dev Seek Inc. All rights reserved.</p>
-         </div>
-      </div>
-   </footer>
-</body>
-
+    <!----------Footer Section--------------->
+    <footer-component></footer-component>
+  </body>
 </html>

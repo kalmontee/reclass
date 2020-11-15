@@ -37,7 +37,8 @@
    <!-- CSS/Bootstrap CDN -->
    <link rel="stylesheet" href="assets/css/reset.css">
    <link rel="stylesheet" href="assets/css/spinner.css">
-   <link rel="stylesheet" href="assets/css/styles.css">
+   <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+   <link rel="stylesheet" href="assets/css/scss/main.css">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -52,29 +53,15 @@
       crossorigin="anonymous"></script>
 
    <script src="assets/js/moment.js"></script>
+   <script src="assets/js/components/Header.js"></script>
+   <script src="assets/js/components/Footer.js"></script>
    <script src="assets/js/main.js"></script>
    <title>Recent Jobs Added</title>
 </head>
 
 <body>
-   <header>
-      <div class="header-container">
-         <div id="logo">
-            <i class="fas fa-atom"></i>
-            <span>Dev Seek</span>
-         </div>
 
-         <div class="movil-bar">
-            <i class="fas fa-bars"></i>
-         </div>
-
-         <nav>
-            <a href="/">Search Jobs</a>
-            <a href="/employer">Employer Post Job</a>
-            <a href="/recentjobs">Recent Jobs Added</a>
-         </nav>
-      </div>
-   </header>
+   <header-component></header-component>
 
    <section class="options">
       <menu class="menu">
@@ -133,50 +120,7 @@
    </div>
 
    <!----------Footer Section--------------->
-   <footer>
-      <div class="logo-footer">
-         <i class="fas fa-atom"></i>
-         <span>Dev Seek</span>
-      </div>
-      <div>
-         <div class="footer-info container">
-            <div class="resources">
-               <h6>CONTACT</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Contact Us</a></h5>
-                  <h5><a href="#">Help Center</a></h5>
-               </div>
-            </div>
-            <div class="resources">
-               <h6>ABOUT</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Salary</a></h5>
-                  <h5><a href="#">Jobs</a></h5>
-                  <h5><a href="#">Community</a></h5>
-               </div>
-            </div>
-            <div class="resources">
-               <h6>PLATFORM</h6>
-               <ul>
-                  <li><a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                  </li>
-                  <li><a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                  <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-               </ul>
-            </div>
-            <div class="resources">
-               <h6>RESOURCES</h6>
-               <div class="resources-info">
-                  <h5><a href="#">Blog</a></h5>
-                  <h5><a href="#">Services</a></h5>
-               </div>
-            </div>
-         </div>
-         <div class="footer-end container">
-            <p>&copy 2020 Dev Seek Inc. All rights reserved.</p>
-         </div>
-      </div>
-   </footer>
+   <footer-component></footer-component>
 
 </body>
 
